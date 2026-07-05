@@ -4,6 +4,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>이원형 교수 연구실 - 홍익대학교 화학공학전공</title>
     <style>
+
+/* 반응형 네비게이션 바 (모바일용) */
+@media (max-width: 768px) {
+    nav ul {
+        flex-wrap: wrap; /* 메뉴 항목들이 공간이 부족하면 다음 줄로 넘어가도록 설정 */
+        padding: 5px 0; /* 상하 여백 추가 */
+    }
+
+    nav ul li a {
+        padding: 12px 15px; /* 모바일 화면에 맞게 패딩(여백) 축소 */
+        font-size: 0.95rem; /* 글자 크기 약간 줄임 */
+    }
+}
+
         /* 기본 스타일링 및 테마 컬러 */
         :root {
             --primary-color: #003366; /* 홍익대학교 네이비 블루 */
@@ -700,10 +714,10 @@
 
     <nav>
         <ul>
-            <li><a href="#home" class="active" onclick="navigateTo('home')">Home</a></li>
+            <li><a href="#home" class="" onclick="navigateTo('home')">Home</a></li>
             <li><a href="#news" onclick="navigateTo('news')" class="">News</a></li>
             <li><a href="#research" onclick="navigateTo('research')" class="">Research</a></li>
-            <li><a href="#publications" onclick="navigateTo('publications')" class="">Publications</a></li>
+            <li><a href="#publications" onclick="navigateTo('publications')" class="active">Publications</a></li>
             <li><a href="#members" onclick="navigateTo('members')" class="">Members</a></li>
             <li><a href="#gallery" onclick="navigateTo('gallery')" class="">Gallery</a></li>
             <li><a href="#courses" onclick="navigateTo('courses')" class="">Courses</a></li>
@@ -714,7 +728,7 @@
     <div class="container" id="main-content">
 
         <!-- Home Section -->
-        <section id="home" class="page-section active">
+        <section id="home" class="page-section">
             <h2>
                 <span id="home-title">Welcome to EEEL!</span>
                 
@@ -802,7 +816,7 @@
         </section>
 
         <!-- Publications Section -->
-        <section id="publications" class="page-section">
+        <section id="publications" class="page-section active">
             <h2>
                 <span id="pub-title">Publications</span>
                 
