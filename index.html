@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이원형 교수 연구실 - 홍익대학교 화학공학전공</title>
+    <style>
+        /* 기본 스타일링 및 테마 컬러 */
+        :root {
+            --primary-color: #003366; /* 홍익대학교 네이비 블루 */
+            --secondary-color: #f4f4f4;
+            --accent-color: #e06d53;
+            --text-color: #333;
+            --admin-border: 1px dashed #e06d53;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #fcfcfc;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 1.8rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        header p {
+            margin: 8px 0 0;
+            font-size: 1.1rem;
+            opacity: 0.85;
+        }
+
+        /* 내비게이션 바 (고정형) */
+        nav {
+            background-color: #fff;
+            border-bottom: 2px solid var(--primary-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 18px 25px;
+            color: #555;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 1.05rem;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        /* 페이지 섹션 화면 전환 (SPA 방식) */
+        .container {
+            width: 85%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 3rem 0;
+            flex: 1;
+        }
+
+        .page-section {
+            display: none; /* 기본 숨김 */
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+
+        .page-section.active {
+            display: block; /* 활성화된 섹션만 표시 */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 12px;
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* 텍스트 편집 시 적용될 수 있는 하이퍼링크 스타일 */
+        [contenteditable="true"] a {
+            color: var(--accent-color) !important;
+            text-decoration: underline !important;
+            font-weight: bold;
+        }
+
+        /* 홈 섹션 히어로 영역 */
+        .hero {
+            background: linear-gradient(135deg, #f5f8ff 0%, #e6eefc 100%);
+            padding: 40px;
+            border-radius: 12px;
+            border-left: 5px solid var(--primary-color);
+            margin-bottom: 30px;
+        }
+        .hero h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+
+        /* 홈 화면 사진 3개 그리드 레이아웃 */
+        .home-photos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .home-photo-item {
+            background: #fff;
+            border: 1px solid #e1e8ed;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .home-photo-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.05);
+        }
+
+        .home-photo-img {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+            border-bottom: 1px solid #f0f0f0;
+            display: block;
+        }
+
+        .home-photo-caption {
+            padding: 12px;
+            text-align: center;
+            font-size: 0.95rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            background-color: #fff;
+        }
+
+        /* 뉴스 목록 스타일 */
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .news-item {
+            background: #fff;
+            border-left: 5px solid var(--accent-color);
+            padding: 18px 22px;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            position: relative;
+            border-top: 1px solid #eee;
+            border-right: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+
+        .news-date {
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .news-title {
+            font-size: 1.15rem;
+            font-weight: bold;
+            margin: 0 0 5px 0;
+            color: var(--primary-color);
+        }
+
+        .news-desc {
+            margin: 0;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        /* 그리드 레이아웃 (연구 분야 카드) */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 15px;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid #e1e8ed;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 8px;
+        }
+
+        /* 연구 카드 이미지 스타일 */
+        .card-img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border: 1px solid #eee;
+        }
+
+        /* 논문 연도 그룹 및 리스트 스타일 */
+        .pub-year-group {
+            margin-bottom: 35px;
+            background: #fff;
+            padding: 20px 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            border: 1px solid #eaeaea;
+        }
+
+        .pub-year {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pub-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .pub-item {
+            display: flex;
+            gap: 20px;
+            padding: 15px;
+            background-color: #fafafa;
+            border-radius: 6px;
+            border-left: 4px solid var(--primary-color);
+            align-items: flex-start;
+            position: relative;
+        }
+
+        /* 논문 썸네일 가로 비율 맞춤 조정 (3:2 비율) */
+        .pub-thumbnail {
+            width: 120px;
+            height: 80px;
+            object-fit: cover;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background-color: #fff;
+            flex-shrink: 0;
+        }
+
+        .pub-details {
+            flex-grow: 1;
+            font-size: 1.05rem;
+        }
+
+        /* 멤버 레이아웃 */
+        .member-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .member-card {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .member-photo {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-color);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            background-color: #eee;
+            flex-shrink: 0;
+        }
+
+        .member-info {
+            flex-grow: 1;
+        }
+
+        .member-info h3 {
+            margin: 0 0 10px 0;
+        }
+
+        /* 동일 카드 내 학생 그리드 배치 스타일 */
+        .student-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .student-item {
+            background-color: #f9fbfd;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px 15px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .student-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+        }
+
+        .student-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-color);
+            margin: 0 auto 12px auto;
+            display: block;
+            background-color: #eee;
+        }
+
+        .student-name {
+            font-weight: bold;
+            font-size: 1.05rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .student-detail {
+            font-size: 0.85rem;
+            color: #666;
+            margin: 2px 0;
+        }
+
+        /* 갤러리 그리드 레이아웃 */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            background-color: #fff;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .gallery-img-placeholder {
+            width: 100%;
+            height: 200px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: 500;
+            background-size: cover;
+            background-position: center;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .gallery-img-placeholder:hover {
+            opacity: 0.9;
+        }
+
+        .gallery-info {
+            padding: 15px;
+        }
+
+        .gallery-info h4 {
+            margin: 0 0 8px 0;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+        }
+
+        .gallery-info p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* 라이트박스(Lightbox) 모달 효과 */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            cursor: zoom-out;
+        }
+
+        .lightbox-content {
+            max-width: 85%;
+            max-height: 75%;
+            border-radius: 6px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+            animation: zoomIn 0.25s ease-out forwards;
+            cursor: default;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .lightbox-close:hover {
+            color: var(--accent-color);
+        }
+
+        #lightbox-caption {
+            margin-top: 15px;
+            color: #fff;
+            text-align: center;
+            font-size: 1.1rem;
+            max-width: 80%;
+            line-height: 1.5;
+        }
+
+        /* 코스 리스트 스타일 */
+        .course-item {
+            padding: 12px 18px;
+            background: #fff;
+            border: 1px solid #eaeaea;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* 푸터 */
+        footer {
+            background-color: #222;
+            color: #ccc;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: auto;
+            border-top: 3px solid var(--primary-color);
+        }
+
+        footer p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        /* 관리자 기능 UI */
+        .admin-btn-container {
+            margin-top: 15px;
+        }
+
+        .btn-admin {
+            background-color: #444;
+            color: #fff;
+            border: none;
+            padding: 6px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: background 0.2s;
+        }
+
+        .btn-admin:hover {
+            background-color: var(--accent-color);
+        }
+
+        /* 관리자 상단 컨트롤 바 */
+        #admin-panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #ffc107;
+            color: #212529;
+            padding: 10px 20px;
+            text-align: center;
+            font-weight: bold;
+            z-index: 9999;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        #admin-panel button {
+            background-color: #212529;
+            color: white;
+            border: none;
+            padding: 6px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        #admin-panel button:hover {
+            background-color: #424649;
+        }
+
+        /* 텍스트 포맷터 컴포넌트 */
+        .editor-toolbar {
+            display: inline-flex;
+            gap: 4px;
+            background-color: rgba(0, 0, 0, 0.1);
+            padding: 4px;
+            border-radius: 6px;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            margin: 0 10px;
+        }
+
+        .editor-toolbar button {
+            background-color: #fff !important;
+            color: #333 !important;
+            border: 1px solid #ccc !important;
+            padding: 3px 8px !important;
+            font-size: 0.8rem !important;
+            border-radius: 4px !important;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+
+        .editor-toolbar button:hover {
+            background-color: #e2e8f0 !important;
+        }
+
+        body.admin-active {
+            padding-top: 50px; /* 관리자 바 여백 */
+        }
+
+        /* 관리자 편집 활성화 스타일 */
+        body.admin-active [contenteditable="true"] {
+            outline: var(--admin-border);
+            background-color: #fffae6;
+            cursor: text;
+        }
+
+        body.admin-active [contenteditable="true"]:hover {
+            background-color: #fff3cd;
+        }
+
+        /* 관리자 전용 제어기 스타일 (기본 숨김) */
+        .admin-control {
+            display: none !important;
+        }
+
+        body.admin-active .admin-control {
+            display: inline-flex !important;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* 동적 추가 / 삭제 버튼 전용 데코레이션 */
+        .btn-add-section {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .btn-add-section:hover {
+            background-color: #218838;
+        }
+
+        .btn-delete-item {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .btn-delete-item:hover {
+            background-color: #c82333;
+        }
+
+        .admin-img-url-input {
+            display: none;
+            width: 100%;
+            margin-top: 8px;
+            font-size: 0.8rem;
+            padding: 5px;
+            box-sizing: border-box;
+            border: 1px dashed var(--accent-color);
+            background-color: #fffdf5;
+            border-radius: 4px;
+        }
+
+        body.admin-active .admin-img-url-input {
+            display: block;
+        }
+    </style>
+</head>
+<body class="" style="padding-top: 0px;">
+
+    <!-- 관리자 컨트롤 패널 -->
+    
+
+    <header>
+        <h1 id="header-title">Energy &amp; Environmental Engineering Lab</h1>
+        <p id="header-sub">홍익대학교 화학공학전공 이원형 교수 연구실</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#home" class="active" onclick="navigateTo('home')">Home</a></li>
+            <li><a href="#news" onclick="navigateTo('news')" class="">News</a></li>
+            <li><a href="#research" onclick="navigateTo('research')" class="">Research</a></li>
+            <li><a href="#publications" onclick="navigateTo('publications')" class="">Publications</a></li>
+            <li><a href="#members" onclick="navigateTo('members')" class="">Members</a></li>
+            <li><a href="#gallery" onclick="navigateTo('gallery')" class="">Gallery</a></li>
+            <li><a href="#courses" onclick="navigateTo('courses')" class="">Courses</a></li>
+            <li><a href="#contact" onclick="navigateTo('contact')" class="">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container" id="main-content">
+
+        <!-- Home Section -->
+        <section id="home" class="page-section active">
+            <h2>
+                <span id="home-title">Welcome to EEEL!</span>
+                
+            </h2>
+            <div class="hero">
+                <h3 id="hero-title">Our Goal</h3>
+                <p id="hero-text">The <b>Energy &amp; Environmental Engineering Lab (EEEL)</b> is dedicated to pioneering the transition toward a carbon-negative world through innovative process engineering and molecular-scale science. Our research focuses on developing transformative technologies to address the global climate crisis and resource scarcity, primarily leveraging clathrate hydrate technology for efficient CO2 capture, energy carrier storage, and advanced water treatment. Simultaneously, we are advancing the hydrogen economy by engineering thermochemical pathways for biomass upcycling. By bridging the gap between fundamental chemical thermodynamics and scalable engineering solutions, EEEL strives to create a sustainable synergy between energy production and environmental preservation, providing the technical foundation for a cleaner future.&nbsp;<br><br></p>
+            </div>
+
+            <!-- 홈 화면 3단 사진 영역 -->
+            <div class="home-photos-grid" id="home-photos-grid">
+                <!-- 사진 1 -->
+                <div class="home-photo-item">
+                    
+                    <img class="home-photo-img" src="https://images.unsplash.com/photo-1606206873764-fd15e242df52?q=80&amp;w=1740&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Lab Research Environment">
+                    
+                    <div class="home-photo-caption">Engineering</div>
+                </div>
+                <!-- 사진 2 -->
+                
+                <!-- 사진 3 -->
+                <div class="home-photo-item">
+                    
+                    <img class="home-photo-img" src="https://images.unsplash.com/photo-1655720845034-b8f615109b5b?q=80&amp;w=2064&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Seminar and Discussion">
+                    
+                    <div class="home-photo-caption">Sustainability</div>
+                </div>
+            </div>
+
+            <p id="home-subtext"><br></p>
+        </section>
+
+        <!-- News Section -->
+        <section id="news" class="page-section">
+            <h2>
+                <span id="news-title">News &amp; Announcements</span>
+                
+            </h2>
+            <p id="news-intro">EEEL의 최신 공지사항과 활동 성과를 전해드립니다.</p>
+
+            <div class="news-list" id="news-list">
+                <div class="news-item">
+                    
+                    <div class="news-date">2026-07-05</div>
+                    <div class="news-title">연구실 웹사이트 오픈</div>
+                    <div class="news-desc">이원형 교수 연구실(Energy &amp; Environmental Engineering Lab)의 홈페이지가 개설되었습니다. 연구실 소식과 최근 논문 성과들이 이곳을 통해 업데이트됩니다.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research Section -->
+        <section id="research" class="page-section">
+            <h2>
+                <span id="research-title">Research Areas</span>
+                
+            </h2>
+            <p id="research-intro">EEEL의 핵심 연구 영역 및 학술 가치입니다.</p>
+
+            <div class="grid-3" id="research-grid">
+                <!-- Research Card 1 -->
+                <div class="card">
+                    
+                    <img class="card-img" src="https://images.unsplash.com/photo-1763259109366-72c37c673299?q=80&amp;w=2064&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Marine Biomass">
+                    
+                    <h3 id="res-card-t1">Gas treatment</h3>
+                    <p id="res-card-p1">물 기반 다공성 물질인 클러스레이트 하이드레이트 (Clathrate hydrate)를 이용한 에너지 캐리어 저장, 탄소 포집 및 가스 정제에 대한 연구를 진행하고 있습니다.</p>
+                </div>
+                <!-- Research Card 2 -->
+                <div class="card">
+                    
+                    <img class="card-img" src="https://images.unsplash.com/photo-1519455953755-af066f52f1a6?q=80&amp;w=774&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Metal Uptake">
+                    
+                    <h3 id="res-card-t2">Wastewater treatment</h3>
+                    <p id="res-card-p2">해조류를 이용한 금속 흡착, 그리고 클러스레이트 하이드레이트를 이용한 금속 분리 기법을 통해 폐수 처리 및 해수담수화에 관한 연구를 진행하고 있습니다.</p>
+                </div>
+                <!-- Research Card 3 -->
+                <div class="card">
+                    
+                    <img class="card-img" src="https://images.unsplash.com/photo-1637310934931-599fde9b0db0?q=80&amp;w=2064&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Biohydrogen">
+                    
+                    <h3 id="res-card-t3">Biomass upcycling</h3>
+                    <p id="res-card-p3">수상 바이오매스로부터 고부가가치의 희토류 금속을 추출하고, 바이오수소를 생산하는 업사이클링 공정에 대한 연구를 진행하고 있습니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Publications Section -->
+        <section id="publications" class="page-section">
+            <h2>
+                <span id="pub-title">Publications</span>
+                
+            </h2>
+            <p id="pub-intro"><a href="https://scholar.google.com/citations?user=pJN4EwYAAAAJ" target="_blank">Google Schoar</a></p>
+
+            <div id="pub-year-container">
+                <!-- 2025 Group -->
+                <div class="pub-year-group">
+                    <div class="pub-year">
+                        <span>2026</span>
+                        
+                    </div>
+                    <div class="pub-list">
+                        <div class="pub-item">
+                            
+                            <img class="pub-thumbnail" src="https://ars.els-cdn.com/content/image/1-s2.0-S1385894726033395-gr4.jpg" alt="Paper Thumbnail">
+                            <div class="pub-details">
+                                
+                                <p style="margin: 5px 0 0 0;">K. Kim, <b>W. Lee (First author)</b>, J. Lee, N. Zafira, S. Jeong, J. Sa, J. W. Lee*, Instantaneous CO2 hydrate nucleation enabled by liable cluster solutions for efficient carbon capture and storage, <b>Chemical Engineering Journal</b>, 2026, 539, 175879. <a href="https://doi.org/10.1016/j.cej.2026.175879" target="_blank">(Link)</a></p>
+                            </div>
+                        </div>
+                    <div class="pub-item">
+                
+                <img class="pub-thumbnail" src="https://ars.els-cdn.com/content/image/1-s2.0-S1385894726008107-ga1.jpg" alt="Paper Thumbnail">
+                <div class="pub-details">
+                    
+                    <p style="margin: 5px 0 0 0;">K. Kim, J. Lee, <b>W. Lee</b>, N. Zafira, S. Moon, Y. Ahn, J. W. Lee*, High-capacity natural gas storage in a water-framework via compositionally tuned ternary emulsions, <b>Chemical Engineering Journal</b>, 2026, 530, 173351. <a href="https://doi.org/10.1016/j.cej.2026.173351" target="_blank">(Link)</a></p>
+                </div>
+            </div></div>
+                </div>
+
+                <!-- 2024 Group -->
+                <div class="pub-year-group">
+                    <div class="pub-year">
+                        <span>2025</span>
+                        
+                    </div>
+                    <div class="pub-list">
+                        <div class="pub-item">
+                            
+                            <img class="pub-thumbnail" src="https://pubs.acs.org/cms/10.1021/acssuschemeng.5c08832/asset/images/medium/sc5c08832_0007.gif" alt="Paper Thumbnail">
+                            <div class="pub-details">
+                                
+                                <p style="margin: 5px 0 0 0;">D. Choi, <b>W. Lee</b>, S. Choi, L. Roberson, J. Avalos, A. Moment*, Waste Sargassum Seaweed as a Sustainable Resource for Rare Earth Element Recovery, <b>ACS Sustainable Chemistry &amp; Engineering</b>, 2025, 13, 47, 20476-20485. <a href="https://doi.org/10.1021/acssuschemeng.5c08832" target="_blank">(Link)</a></p>
+                            </div>
+                        </div>
+                    <div class="pub-item">
+                
+                <img class="pub-thumbnail" src="https://ars.els-cdn.com/content/image/1-s2.0-S1383586625040328-ga1.jpg" alt="Paper Thumbnail">
+                <div class="pub-details">
+                    
+                    <p style="margin: 5px 0 0 0;">J. Lee, <b>W. Lee (First Author)</b>, J. Kang, M. Kim, A. Roh, J. Jeong, J. W. Lee*, Y. Ahn*, Surfactant-stabilized cyclopentane hydrate emulsions for removing tetramethylammonium hydroxide from semiconductor wastewater, <b>Separation and Purification Technology</b>, 2025, 380, 3, 135435. <a href="https://doi.org/10.1016/j.seppur.2025.135435" target="_blank">(Link)</a></p>
+                </div>
+            </div><div class="pub-item">
+                
+                <img class="pub-thumbnail" src="https://ars.els-cdn.com/content/image/1-s2.0-S2589014X25002531-ga1.jpg" alt="Paper Thumbnail">
+                <div class="pub-details">
+                    
+                    <p style="margin: 5px 0 0 0;">T. Vo, H. Kim, K. Kim, <b>W. Lee</b>, N. Zafira, D. Nguyen, J. W. Lee*, Hydrogen production from spent coffee grounds in alkaline conditions using Nisingle bondFe/Al2O3 as a catalyst, <b>Bioresource Technology Reports</b>, 2025, 31, 102271. <a href="https://doi.org/10.1016/j.biteb.2025.102271" target="_blank">(Link)</a></p>
+                </div>
+            </div><div class="pub-item">
+                
+                <img class="pub-thumbnail" src="https://ars.els-cdn.com/content/image/1-s2.0-S1385894725066847-ga1.jpg" alt="Paper Thumbnail">
+                <div class="pub-details">
+                    
+                    <p style="margin: 5px 0 0 0;"><strong>W. Lee (First Author),&nbsp;</strong>K. Kim, J. Lee, D. W. Kang, Y. Ahn, S. Lee, Y. Park, J. W. Lee*, Viable hydrate-based CO2 capture facilitated by cyclopentane hydrate seeds and tailored kinetic promoters, <b>Chemical Engineering Journal</b>, 2025, 250, 165846. <a href="https://doi.org/10.1016/j.cej.2025.165846" target="_blank">(Link)</a></p>
+                </div>
+            </div><div class="pub-item">
+                
+                <img class="pub-thumbnail" src="https://pubs.acs.org/cms/10.1021/acs.energyfuels.4c05572/asset/images/medium/ef4c05572_0011.gif" alt="Paper Thumbnail">
+                <div class="pub-details">
+                    
+                    <p style="margin: 5px 0 0 0;"><strong>W. Lee (First Author),&nbsp;</strong>K. Kim, D. W. Kang, Y. Ahn. J. W. Lee*, Enhanced Hydrate Growth Kinetics with Hydrate Seeds and Promoter under a Static Reaction System, <b>Energy &amp; Fuels</b>, 2025, 39, 5, 2508-2520. <a href="https://doi.org/10.1021/acs.energyfuels.4c05572" target="_blank">(Link)</a></p>
+                </div>
+            </div><div class="pub-item">
+                
+                <img class="pub-thumbnail" src="https://ars.els-cdn.com/content/image/1-s2.0-S0378381224002139-gr2.jpg" alt="Paper Thumbnail">
+                <div class="pub-details">
+                    
+                    <p style="margin: 5px 0 0 0;"><strong>W. Lee (First Author),&nbsp;</strong>J. Lee, K. Kim, Y. Ahn*, J. W. Lee*, Thermodynamic phase equilibria of binary SF6–N2O hydrates and their structural analysis for the hydrate-based greenhouse gas capture, <b>Fluid Phase Equilibria</b>, 2025, 588, 114238. <a href="https://doi.org/10.1016/j.fluid.2024.114238" target="_blank">(Link)</a></p>
+                </div>
+            </div><div class="pub-item">
+                
+                <img class="pub-thumbnail" src="https://ars.els-cdn.com/content/image/1-s2.0-S0306261924017501-gr1.jpg" alt="Paper Thumbnail">
+                <div class="pub-details">
+                    
+                    <p style="margin: 5px 0 0 0;"><strong>W. Lee (First Author),&nbsp;</strong>M. Kim, S. Moon, J. W. Lee*, Y. Ahn*, Rapid hydrogen enclathration and unprecedented tuning phenomenon within superabsorbent polymers, <b>Applied Energy</b>, 2026, 377, 124367. <a href="https://doi.org/10.1016/j.apenergy.2024.124367" target="_blank">(Link)</a></p>
+                </div>
+            </div></div>
+                </div>
+
+                <!-- 2023 Group -->
+                <div class="pub-year-group">
+                    <div class="pub-year">
+                        <span>2024</span>
+                        
+                    </div>
+                    <div class="pub-list">
+                        <div class="pub-item">
+                            
+                            <img class="pub-thumbnail" src="https://ars.els-cdn.com/content/image/1-s2.0-S1385894724081579-ga1.jpg" alt="Paper Thumbnail">
+                            <div class="pub-details">
+                                
+                                <p style="margin: 5px 0 0 0;">K. Kim, <b>W. Lee</b>, J. Lee, J. W. Lee*, Water-in-oil emulsions as micro-reactors for achieving extremely rapid and high hydrogen uptakes into clathrate hydrates, <b>Chemical Engieering Journal</b>, 2024, 499, 156666. <a href="https://doi.org/10.1016/j.cej.2024.156666" target="_blank">(Link)</a></p>
+                            </div>
+                        </div>
+                    <div class="pub-item">
+                
+                <img class="pub-thumbnail" src="https://ars.els-cdn.com/content/image/1-s2.0-S0306261924013709-gr1.jpg" alt="Paper Thumbnail">
+                <div class="pub-details">
+                    
+                    <p style="margin: 5px 0 0 0;"><strong>W. Lee (First Author),&nbsp;</strong>D. W. Kang, Y. Ahn, K. Kim, J. W. Lee*, Self-supporting hydrate template with hydrate seeds and promoter liquids for semi-continuous formation of hydrogen hydrates, <b>Applied Energy</b>, 2024, 373, 123987. <a href="https://doi.org/10.1016/j.apenergy.2024.123987" target="_blank">(Link)</a></p>
+                </div>
+            </div><div class="pub-item">
+                
+                <img class="pub-thumbnail" src="https://ars.els-cdn.com/content/image/1-s2.0-S0016236124012663-gr4.jpg" alt="Paper Thumbnail">
+                <div class="pub-details">
+                    
+                    <p style="margin: 5px 0 0 0;">K. Kim, D. W. Kang, <b>W. Lee</b>, S. Cho, J. D. Lee, J. W. Lee*, Enhanced methane storage in sH clathrate hydrates directly derived from sII hydrate seeds, <b>Fuel</b>, 2024, 371, 132118. <a href="https://doi.org/10.1016/j.fuel.2024.132118" target="_blank">(Link)</a></p>
+                </div>
+            </div><div class="pub-item">
+                
+                <img class="pub-thumbnail" src="https://ars.els-cdn.com/content/image/1-s2.0-S0360544224004031-ga1.jpg" alt="Paper Thumbnail">
+                <div class="pub-details">
+                    
+                    <p style="margin: 5px 0 0 0;">D. W. Kang, <b>W. Lee</b>, Y. Ahn, K. Kim, J. W. Lee*, Facile and sustainable methane storage via clathrate hydrate formation with low dosage promoters in a sponge matrix, <b>Energy</b>, 2024, 292, 130631. <a href="https://doi.org/10.1016/j.energy.2024.130631" target="_blank">(Link)</a></p>
+                </div>
+            </div><div class="pub-item">
+                
+                <img class="pub-thumbnail" src="https://ars.els-cdn.com/content/image/1-s2.0-S1385894724008945-ga1.jpg" alt="Paper Thumbnail">
+                <div class="pub-details">
+                    
+                    <p style="margin: 5px 0 0 0;">G. Han, <b>W. Lee (First Author)</b>, M. Kim, J. W. Lee*, Y. Ahn*, Hydrogen separation from hydrogen-compressed natural gas blends through successive hydrate formations, <b>Chemical Engineering Journal</b>, 2024, 483, 149409. <a href="https://doi.org/10.1016/j.cej.2024.149409" target="_blank">(Link)</a></p>
+                </div>
+            </div><div class="pub-item">
+                
+                <img class="pub-thumbnail" src="https://rscj.silverchair-cdn.com/rscj/content_public/journal/gc/26/13/10.1039_d4gc00390j/1/m_d4gc00390j-ga.png?Expires=1786023734&amp;Signature=Jr-Jmg9xuIsf0jQGh23q0KAC9rugmYh-fh1u3Y2OSHAS1dqTQhxD4J85r34HsMAU1Y1XEUHR7M8ulyMjtDcSkacUSNkzvclFrpNK75GLaJarF23-ccrW6Dr9vf8~9ha1h~~lzr2XAWgmMqA5IX8EVv40NYbeBsnfablaOdTZcuyMfOGZCTRmYxUSfhvv6reBSAiMh8Y9o1c1OJ0dQH9VKN1D8TeL7Hl7X7Km8CY8b0dJB51tyRfN0nt9wtXjhnqb1ai3OudXUnkb21VqECzSEzTB5TFJZ~nCv6NBa64k3lpE6CykCvBkhwkcbcAdLC44sPTUZ4GKCG5oN2fhdbBiog__&amp;Key-Pair-Id=APKAIE5G5CRDK6RD3PGA" alt="Paper Thumbnail">
+                <div class="pub-details">
+                    
+                    <p style="margin: 5px 0 0 0;"><strong>W. Lee (First Author),&nbsp;</strong>K. Kim, J. Lee, Y. Ahn, J. W. Lee*, Perspectives on facilitating natural gas and hydrogen storage in clathrate hydrates under a static system, <b>Green Chemistry</b>, 2024, 26, 13, 7552-7578. <a href=" https://doi.org/10.1039/d4gc00390j" target="_blank">(Link)</a></p>
+                </div>
+            </div></div>
+                </div>
+            </div>
+<div class="pub-year-group">
+                <div class="pub-year">
+                    <span>2023</span>
+                    
+                </div>
+                <div class="pub-list">
+                    <div class="pub-item">
+                        
+                        <img class="pub-thumbnail" src="https://ars.els-cdn.com/content/image/1-s2.0-S221334372301672X-ga1.jpg" alt="Paper Thumbnail">
+                        <div class="pub-details">
+                            
+                            <p style="margin: 5px 0 0 0;">Y. Lee, H. Kim, <b>W. Lee</b>, D. W. Kang, J. W. Lee*, Y. Ahn*, Thermodynamic and kinetic properties of CO2 hydrates and their applications in CO2 capture and separation, <b>Journal of Environmental Chemical Engineering</b>, 2023, 11, 5, 110933. <a href="https://doi.org/10.1016/j.jece.2023.110933" target="_blank">(Link)</a></p>
+                        </div>
+                    </div>
+                <div class="pub-item">
+                
+                <img class="pub-thumbnail" src="https://ars.els-cdn.com/content/image/1-s2.0-S1364032123000734-gr6.jpg" alt="Paper Thumbnail">
+                <div class="pub-details">
+                    
+                    <p style="margin: 5px 0 0 0;"><strong>W. Lee (First Author),&nbsp;</strong>D. W. Kang, Y. Ahn, J. W. Lee*, Blended hydrate seed and liquid promoter for the acceleration of hydrogen hydrate formation, <b>Renewable and Sustainable Energy Reviews</b>, 2023, 177, 113217. <a href="https://doi.org/10.1016/j.rser.2023.113217" target="_blank">(Link)</a></p>
+                </div>
+            </div><div class="pub-item">
+                
+                <img class="pub-thumbnail" src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&amp;w=150" alt="Paper Thumbnail">
+                <div class="pub-details">
+                    
+                    <p style="margin: 5px 0 0 0;">J. Park, <b>W. Lee</b>, J. W. Lee*, Droplet size distribution in a biphasic liquid reactor for understanding the impact of various dual impeller designs on the morphology of S-PVC, <b>Korean Journal of Chemical Engineering</b>, 2023, 40, 46-56. <a href="https://doi.org/10.1007/s11814-022-1252-7" target="_blank">(Link)</a></p>
+                </div>
+            </div></div>
+            </div><div class="pub-year-group">
+                <div class="pub-year">
+                    <span>2022</span>
+                    
+                </div>
+                <div class="pub-list">
+                    <div class="pub-item">
+                        
+                        <img class="pub-thumbnail" src="https://ars.els-cdn.com/content/image/1-s2.0-S221298202200124X-gr2.jpg" alt="Paper Thumbnail">
+                        <div class="pub-details">
+                            
+                            <p style="margin: 5px 0 0 0;">D. W. Kang, <b>W. Lee (First Author)</b>, Y. Ahn*, Superabsorbent polymer for improved CO2 hydrate formation under a quiescent system, <b>Journal of CO2 Utilization</b>, 2022, 61, 102005. <a href="https://doi.org/10.1016/j.jcou.2022.102005" target="_blank">(Link)</a></p>
+                        </div>
+                    </div>
+                <div class="pub-item">
+                
+                <img class="pub-thumbnail" src="https://ars.els-cdn.com/content/image/1-s2.0-S0167732222000253-gr5.jpg" alt="Paper Thumbnail">
+                <div class="pub-details">
+                    
+                    <p style="margin: 5px 0 0 0;">D. W. Kang, <b>W. Lee</b>, Y. Ahn, J. W. Lee*, Exploring tuning phenomena of THF-H2 hydrates via molecular dynamics simulations, <b>Journal of Molecular Liquids</b>, 2022, 349, 118490. <a href="https://doi.org/10.1016/j.molliq.2022.118490" target="_blank">(Link)</a></p>
+                </div>
+            </div></div>
+            </div><div class="pub-year-group">
+                <div class="pub-year">
+                    <span>2021</span>
+                    
+                </div>
+                <div class="pub-list">
+                    <div class="pub-item">
+                        
+                        <img class="pub-thumbnail" src="https://pubs.acs.org/cms/10.1021/acssuschemeng.1c00807/asset/images/medium/sc1c00807_0007.gif" alt="Paper Thumbnail">
+                        <div class="pub-details">
+                            
+                            <p style="margin: 5px 0 0 0;"><strong>W. Lee (First Author),&nbsp;</strong>D. W. Kang, Y. Ahn*, J. W. Lee*, Rapid Formation of Hydrogen-Enriched Hydrocarbon Gas Hydrates under Static Conditions, <b>ACS Sustainable Chemistry &amp; Engineering</b>, 2021, 9, 25, 8414-8424. <a href="https://doi.org/10.1021/acssuschemeng.1c00807" target="_blank">(Link)</a></p>
+                        </div>
+                    </div>
+                <div class="pub-item">
+                
+                <img class="pub-thumbnail" src="https://ars.els-cdn.com/content/image/1-s2.0-S1385894721001108-gr4.jpg" alt="Paper Thumbnail">
+                <div class="pub-details">
+                    
+                    <p style="margin: 5px 0 0 0;">D. W. Kang, <b>W. Lee</b>, Y. Ahn*, J. W. Lee*, Confined tetrahydrofuran in a superabsorbent polymer for sustainable methane storage in clathrate hydrates, <b>Chemical Engineering Journal</b>, 2021, 411, 128512. <a href="https://doi.org/10.1016/j.cej.2021.128512" target="_blank">(Link)</a></p>
+                </div>
+            </div></div>
+            </div><div class="pub-year-group">
+                <div class="pub-year">
+                    <span>2020</span>
+                    
+                </div>
+                <div class="pub-list">
+                    <div class="pub-item">
+                        
+                        <img class="pub-thumbnail" src="https://ars.els-cdn.com/content/image/1-s2.0-S1385894720304526-gr6.jpg" alt="Paper Thumbnail">
+                        <div class="pub-details">
+                            
+                            <p style="margin: 5px 0 0 0;">J. Min, D. W. Kang, Y. Ahn. <b>W. Lee</b>, M. Cha, J. W. Lee*, Recoverable magnetic nanoparticles as hydrate inhibitors, <b>Chemical Engineering Journal</b>, 2020, 389, 124461. <a href="https://doi.org/10.1016/j.cej.2020.124461" target="_blank">(Link)</a></p>
+                        </div>
+                    </div>
+                <div class="pub-item">
+                
+                <img class="pub-thumbnail" src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&amp;w=150" alt="Paper Thumbnail">
+                <div class="pub-details">
+                    
+                    <p style="margin: 5px 0 0 0;">S. Baek, <b>W. Lee</b>, J. Min, Y. Ahn, D. W. Kang, J. W. Lee*, Hydrate seeding effect on the metastability of CH4 hydrate, <b>Korean Journal of Chemical Engineering</b>, 2020, 37, 341-349. <a href="https://doi.org/10.1007/s11814-019-0451-3" target="_blank">(Link)</a></p>
+                </div>
+            </div><div class="pub-item">
+                
+                <img class="pub-thumbnail" src="https://pubs.acs.org/cms/10.1021/acs.jpcc.9b11459/asset/images/medium/jp9b11459_0007.gif" alt="Paper Thumbnail">
+                <div class="pub-details">
+                    
+                    <p style="margin: 5px 0 0 0;">J. Min, D. W. Kang, <b>W. Lee</b>, J. W. Lee*, Molecular Dynamics Simulations of Hydrophobic Nanoparticle Effects on Gas Hydrate Formation, <b>The Journal of Physical Chemistry C</b>, 2020, 124, 7, 4162-4171. <a href="https://doi.org/10.1021/acs.jpcc.9b11459" target="_blank">(Link)</a></p>
+                </div>
+            </div></div>
+            </div><div class="pub-year-group">
+                <div class="pub-year">
+                    <span>2019</span>
+                    
+                </div>
+                <div class="pub-list">
+                    
+                <div class="pub-item">
+                
+                <img class="pub-thumbnail" src="https://pubs.acs.org/cms/10.1021/acs.iecr.8b05869/asset/images/medium/ie-2018-058696_0001.gif" alt="Paper Thumbnail">
+                <div class="pub-details">
+                    
+                    <p style="margin: 5px 0 0 0;"><strong>W. Lee (First Author),&nbsp;</strong>J. Min, Y. Ahn, S. Baek, C. Koh, J. W. Lee*, Effect of Naphthenate Formation on the Anti-Adhesive Behavior of Clathrate Hydrates at a Water–Oil Interface, <b>Industrial &amp; Engineering Chemistry Research</b>, 2019, 58, 12, 5674-5070. <a href="https://doi.org/10.1021/acs.iecr.8b05869" target="_blank">(Link)</a></p>
+                </div>
+            </div></div>
+            </div>
+        </section>
+
+        <!-- Members Section -->
+        <section id="members" class="page-section">
+            <h2>
+                <span id="members-title">Members</span>
+            </h2>
+
+            <div class="member-container" id="members-container">
+                <!-- Principal Investigator (지도교수 개별 카드) -->
+                <div class="card member-card">
+                    
+                    <img class="member-photo" src="https://scholar.googleusercontent.com/citations?view_op=view_photo&amp;user=pJN4EwYAAAAJ&amp;citpid=11&amp;authuser=2" alt="PI Photo">
+                    <div class="member-info">
+                        
+                        <h3 id="pi-title">Principal Investigator</h3>
+                        <p id="pi-info"><strong>Wonhyeong Lee (이원형)</strong><br>Assistant Professor, Department of Chemical Engineering, Hongik University<br><br>03/2026 - Present: Assistant Professor, Department of Chemical Engineering, Hongik University<br>09/2024 - 02/2026: Postdoctoral Researcher, University of California, Los Angeles (Advisor: Prof. Alissa Park)<br>03/2024 - 08/2024: Postdoctoral Researcher, KAIST (Advisor: Prof. Jae W. Lee)<br><br>Ph.D., Chemical and Biomolecular Engineering, KAIST (2024) (Advisor: Prof. Jae W. Lee)<br>M.S., Chemical and Biomolecular Engineering, KAIST (2019) (Advisor: Prof. Jae W. Lee)<br>B.S., Chemical and Biomolecular Engineering, KAIST (2018)</p>
+                    </div>
+                </div>
+
+                <!-- Students & Researchers (동일 박스 내 그리드 배치 구조) -->
+                <div class="card" style="width: 100%; box-sizing: border-box;">
+                    <h3 style="margin-top: 0; color: var(--primary-color); font-size: 1.4rem; border-bottom: 2px solid var(--primary-color); padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+                        <span id="students-box-title">Students &amp; Researchers</span>
+                        
+                    </h3>
+
+                    <p id="students-recruitment-text" style="background-color: #f4f8fc; padding: 15px; border-radius: 6px; border-left: 4px solid var(--primary-color); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">We are looking for motivated undergraduate / graduate students who are specifically interested in the fields of CCUS (Carbon Capture, Utilization, and Storage), biomass upcycling, and wastewater treatment. If you are eager to gain research experience and contribute to environmental sustainability, please reach out.<br><b>e-mail: whlee5070@hongik.ac.kr</b></p>
+
+                    <div class="student-grid" id="student-grid">
+                        <!-- Student 1 -->
+                        <div class="student-item">
+                            
+                            <img class="student-photo" src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?q=80&amp;w=774&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Student Photo">
+                            
+                            <div class="student-name">권유정</div>
+                            <div class="student-detail">학부 연구생 (Undergraduate)</div>
+                            <div class="student-detail">연구분야: Biomass upcycling</div>
+                        </div>
+                        <!-- Student 2 -->
+                        <div class="student-item">
+                            
+                            <img class="student-photo" src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?q=80&amp;w=774&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Student Photo">
+                            
+                            <div class="student-name">김채은</div>
+                            <div class="student-detail">학부 연구생 (Undergraduate)</div>
+                            <div class="student-detail">연구분야: Clathrate hydrate</div>
+                        </div>
+                    <div class="student-item">
+                
+                <img class="student-photo" src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?q=80&amp;w=774&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Student Photo">
+                
+                <div class="student-name">김해민</div>
+                <div class="student-detail">학부 연구생 (Undergraduate)</div>
+                <div class="student-detail">연구분야: Clathrate hydrate</div>
+            </div><div class="student-item">
+                
+                <img class="student-photo" src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?q=80&amp;w=774&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Student Photo">
+                
+                <div class="student-name">이시은</div>
+                <div class="student-detail">학부 연구생 (Undergraduate)</div>
+                <div class="student-detail">연구분야: Biomass upcycling</div>
+            </div><div class="student-item">
+                
+                <img class="student-photo" src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?q=80&amp;w=774&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Student Photo">
+                
+                <div class="student-name">한원빈</div>
+                <div class="student-detail">학부 연구생 (Undergraduate)</div>
+                <div class="student-detail">연구분야: Clathrate hydrate</div>
+            </div></div>
+                </div>
+            </div>
+
+		<!-- Alumni (동일 박스 내 그리드 배치 구조) -->
+                <div class="card" style="width: 100%; box-sizing: border-box;">
+                    <h3 style="margin-top: 0; color: var(--primary-color); font-size: 1.4rem; border-bottom: 2px solid var(--primary-color); padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+                        <span id="students-box-title">Alumni</span>
+                        
+                    </h3>
+                    <div class="student-grid" id="student-grid">
+                        <!-- Student 1 -->
+                        
+                        <!-- Student 2 -->
+                        
+                    </div>
+        </div></section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="page-section">
+            <h2>
+                <span id="gallery-title">Gallery</span>
+                
+            </h2>
+            <p id="gallery-intro">연구실의 학회 참여, 실험실 활동 등 다양한 연구 활동 사진첩입니다.</p>
+
+            <div class="gallery-grid" id="gallery-grid">
+                <!-- 아이템 1 -->
+                <div class="gallery-item">
+                    
+                    <div class="gallery-img-placeholder" style="background-image: url(&quot;https://photo.hongik.ac.kr/app/board/attach/image/81409_1751208588000.do&quot;);" onclick="openLightbox(this)"></div>
+                    
+                    <div class="gallery-info">
+                        <h4 id="g-item-t1">Hongik University</h4>
+                        <p id="g-item-p1">홍익대학교</p>
+                    </div>
+                </div>
+                <!-- 아이템 2 -->
+                
+                <!-- 아이템 3 -->
+                
+            </div>
+        </section>
+
+        <!-- Courses Section -->
+        <section id="courses" class="page-section">
+            <h2>
+                <span id="courses-title">Courses</span>
+                
+            </h2>
+            <p id="courses-intro"><b><a href="https://chemeng.hongik.ac.kr/chemeng/index.do" target="_blank">Department of Chemical Engineering, Hongik University</a></b></p>
+
+            <div id="courses-list">
+                <div class="course-item">
+                    <span><strong>반응공학 (Chemical Reaction Engineering):</strong>&nbsp;Spring 2026</span>
+                    
+                </div>
+                <div class="course-item">
+                    <span><strong>열및물질전달 (Heat and Mass Transfer):</strong>&nbsp;Spring 2026</span>
+                    
+                </div>
+                <div class="course-item">
+                    <span><strong>화공양론 (Chemical Engineering Calculation):</strong>&nbsp;Spring 2026</span>
+                    
+                </div>
+                
+                
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="page-section">
+            <h2>
+                <span id="contact-title">Contact Us</span>
+                
+            </h2>
+
+            <div class="card" id="contact-info-container">
+                <div class="course-item" style="border: none; padding: 0 0 10px 0; background: transparent; margin: 0;">
+                    <span><strong>Address:</strong> 서울특별시 마포구 와우산로 94 홍익대학교 과학관 (I동) 409호 (교수 오피스)/607호 (실험실)</span>
+                    
+                </div>
+                <div class="course-item" style="border: none; padding: 0 0 10px 0; background: transparent; margin: 0;">
+                    <span><strong>Email:</strong> whlee5070@hongik.ac.kr</span>
+                    
+                </div>
+                <div class="course-item" style="border: none; padding: 0 0 10px 0; background: transparent; margin: 0;">
+                    <span><strong>Tel:</strong> 02-320-1648</span>
+                    
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- 이미지 라이트박스 팝업 모달 -->
+    <div id="lightbox-modal" class="lightbox-modal" onclick="closeLightbox()" style="display: none;">
+        <span class="lightbox-close" onclick="closeLightbox()">×</span>
+        <img class="lightbox-content" id="lightbox-img" onclick="event.stopPropagation()" src="https://photo.hongik.ac.kr/app/board/attach/image/81409_1751208588000.do">
+        <div id="lightbox-caption"><strong>Hongik University</strong><br>홍익대학교</div>
+    </div>
+
+    <footer>
+        <p>© 2026 Energy &amp; Environmental Engineering Lab. All Rights Reserved.</p>
+        <p>Hongik University, Department of Chemical Engineering</p>
+        
+    </footer>
+
+    <script>
+        // SPA 상세 페이지 이동용 내비게이션
+        function navigateTo(sectionId) {
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+
+            const navLinks = document.querySelectorAll('nav ul li a');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + sectionId) {
+                    link.classList.add('active');
+                }
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 로컬 편집 유지를 위한 브라우저 저장소 데이터 불러오기 (v4 최신 캐시 적용)
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedContent = localStorage.getItem('lab_web_content_v4');
+            if (savedContent) {
+                document.getElementById('main-content').innerHTML = savedContent;
+            }
+            const savedHeaderTitle = localStorage.getItem('lab_header_title_v4');
+            if (savedHeaderTitle) document.getElementById('header-title').innerText = savedHeaderTitle;
+
+            const savedHeaderSub = localStorage.getItem('lab_header_sub_v4');
+            if (savedHeaderSub) document.getElementById('header-sub').innerText = savedHeaderSub;
+
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                navigateTo(hash);
+            }
+        });
+
+        // 갤러리 이미지 라이트박스 열기
+        function openLightbox(elem) {
+            if (document.body.classList.contains('admin-active')) return;
+
+            const lightbox = document.getElementById('lightbox-modal');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const captionText = document.getElementById('lightbox-caption');
+
+            const bgImg = elem.style.backgroundImage;
+            const url = bgImg.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+
+            lightbox.style.display = "flex";
+            lightboxImg.src = url;
+
+            const info = elem.closest('.gallery-item, .home-photo-item');
+            if (info) {
+                const h4 = info.querySelector('h4');
+                const caption = info.querySelector('.home-photo-caption');
+                const p = info.querySelector('p');
+
+                if (h4) {
+                    captionText.innerHTML = `<strong>${h4.innerText}</strong>${p ? `<br>${p.innerText}` : ''}`;
+                } else if (caption) {
+                    captionText.innerHTML = `<strong>${caption.innerText}</strong>`;
+                } else {
+                    captionText.innerHTML = "";
+                }
+            } else {
+                captionText.innerHTML = "";
+            }
+        }
+
+        // 라이트박스 닫기
+        function closeLightbox() {
+            document.getElementById('lightbox-modal').style.display = "none";
+        }
+
+        // 이미지 경로 실시간 동기화 바인딩 함수들
+        function updateImageSource(inputElem) {
+            inputElem.setAttribute('value', inputElem.value);
+            const img = inputElem.previousElementSibling;
+            if (img && img.tagName === 'IMG') {
+                img.src = inputElem.value;
+            }
+        }
+
+        // 홈화면 및 썸네일/프로필 동적 이미지 업데이트 바인딩
+        function updateHomePhoto(inputElem) {
+            inputElem.setAttribute('value', inputElem.value);
+            const img = inputElem.closest('.home-photo-item').querySelector('.home-photo-img');
+            if (img) {
+                img.src = inputElem.value;
+            }
+        }
+
+        function updatePubThumbnail(inputElem) {
+            inputElem.setAttribute('value', inputElem.value);
+            const img = inputElem.closest('.pub-item').querySelector('.pub-thumbnail');
+            if (img) {
+                img.src = inputElem.value;
+            }
+        }
+
+        function updateMemberPhoto(inputElem) {
+            inputElem.setAttribute('value', inputElem.value);
+            const img = inputElem.closest('.member-card').querySelector('.member-photo');
+            if (img) {
+                img.src = inputElem.value;
+            }
+        }
+
+        function updateStudentPhoto(inputElem) {
+            inputElem.setAttribute('value', inputElem.value);
+            const img = inputElem.closest('.student-item').querySelector('.student-photo');
+            if (img) {
+                img.src = inputElem.value;
+            }
+        }
+
+        function updateGalleryImage(inputElem) {
+            inputElem.setAttribute('value', inputElem.value);
+            const placeholder = inputElem.previousElementSibling;
+            if (placeholder && placeholder.classList.contains('gallery-img-placeholder')) {
+                placeholder.style.backgroundImage = `url('${inputElem.value}')`;
+            }
+        }
+
+        // 텍스트 볼드, 이탤릭, 하이퍼링크 생성 기능 구현
+        function applyFormat(command) {
+            if (!document.body.classList.contains('admin-active')) return;
+
+            if (command === 'createLink') {
+                const url = prompt("연결할 URL 주소를 입력하세요 (새 탭에서 열리도록 자동 지정됩니다):", "https://");
+                if (url) {
+                    document.execCommand('createLink', false, url);
+
+                    const selection = window.getSelection();
+                    if (selection.rangeCount > 0) {
+                        const container = selection.getRangeAt(0).commonAncestorContainer;
+                        const parentNode = container.nodeType === 3 ? container.parentNode : container;
+                        if (parentNode.tagName === 'A') {
+                            parentNode.setAttribute('target', '_blank');
+                        } else {
+                            const links = parentNode.querySelectorAll('a');
+                            links.forEach(link => {
+                                if (link.getAttribute('href') === url) {
+                                    link.setAttribute('target', '_blank');
+                                }
+                            });
+                        }
+                    }
+                }
+            } else {
+                document.execCommand(command, false, null);
+            }
+        }
+
+        // 동적 콘텐츠 추가용 관리자 함수들
+        function addHomePhoto() {
+            const grid = document.getElementById('home-photos-grid');
+            const newItem = document.createElement('div');
+            newItem.className = 'home-photo-item';
+            newItem.innerHTML = `
+                <button class="btn-delete-item admin-control" onclick="this.parentElement.remove()" style="position: absolute; right: 8px; top: 8px; z-index: 5; padding: 2px 6px;">🗑️</button>
+                <img class="home-photo-img" src="https://images.unsplash.com/photo-1532187863486-abf9d39d66e8?q=80&w=400" alt="New Home Photo">
+                <input type="text" class="admin-img-url-input" value="https://images.unsplash.com/photo-1532187863486-abf9d39d66e8?q=80&w=400" oninput="updateHomePhoto(this)" placeholder="이미지 상대경로 또는 URL">
+                <div class="home-photo-caption" contenteditable="true">새로운 연구소 활동</div>
+            `;
+            grid.appendChild(newItem);
+            refreshEditableStates();
+        }
+
+        // 동적 새 소식 추가 기능
+        function addNewsItem() {
+            const list = document.getElementById('news-list');
+            const newItem = document.createElement('div');
+            newItem.className = 'news-item';
+
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const date = String(now.getDate()).padStart(2, '0');
+            const todayStr = `${year}-${month}-${date}`;
+
+            newItem.innerHTML = `
+                <button class="btn-delete-item admin-control" onclick="this.parentElement.remove()" style="position: absolute; right: 10px; top: 10px; z-index: 5;">🗑️ 삭제</button>
+                <div class="news-date" contenteditable="true">${todayStr}</div>
+                <div class="news-title" contenteditable="true">새 소식 및 연구 성과 알림</div>
+                <div class="news-desc" contenteditable="true">새로운 연구 공지 및 성과 내용을 직접 수정하여 작성하세요.</div>
+            `;
+            list.insertBefore(newItem, list.firstChild);
+            refreshEditableStates();
+        }
+
+        function addResearchCard() {
+            const grid = document.getElementById('research-grid');
+            const newCard = document.createElement('div');
+            newCard.className = 'card';
+            newCard.innerHTML = `
+                <button class="btn-delete-item admin-control" onclick="this.parentElement.remove()" style="position: absolute; right: 10px; top: 10px; z-index: 5;">🗑️ 삭제</button>
+                <img class="card-img" src="https://images.unsplash.com/photo-1507668077129-56e32842fceb?q=80&w=600" alt="New Research Area">
+                <input type="text" class="admin-img-url-input" value="https://images.unsplash.com/photo-1507668077129-56e32842fceb?q=80&w=600" oninput="updateImageSource(this)" placeholder="카드 이미지 URL 주소">
+                <h3 contenteditable="true">새 연구 분야</h3>
+                <p contenteditable="true">새로운 연구 영역에 관한 소개글을 직접 작성하세요.</p>
+            `;
+            grid.appendChild(newCard);
+            refreshEditableStates();
+        }
+
+        function addPubYearGroup() {
+            const container = document.getElementById('pub-year-container');
+            const newGroup = document.createElement('div');
+            newGroup.className = 'pub-year-group';
+            newGroup.innerHTML = `
+                <div class="pub-year">
+                    <span contenteditable="true">2026</span>
+                    <div class="admin-control">
+                        <button class="btn-add-section" onclick="addPublicationItem(this)" style="padding: 2px 8px; font-size: 0.75rem;">+ 논문 추가</button>
+                        <button class="btn-delete-item" onclick="this.closest('.pub-year-group').remove()" style="padding: 2px 8px; font-size: 0.75rem;">🗑️ 그룹 삭제</button>
+                    </div>
+                </div>
+                <div class="pub-list">
+                    <div class="pub-item">
+                        <button class="btn-delete-item admin-control" onclick="this.parentElement.remove()" style="position: absolute; right: 10px; top: 10px; z-index: 5;">🗑️ 삭제</button>
+                        <img class="pub-thumbnail" src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=150" alt="Paper Thumbnail">
+                        <div class="pub-details">
+                            <input type="text" class="admin-img-url-input" value="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=150" oninput="updatePubThumbnail(this)" placeholder="논문 썸네일 URL 주소">
+                            <p contenteditable="true" style="margin: 5px 0 0 0;"><strong>Lee, W.</strong>, "새 논문 제목" <em>저널명 입력</em>, 2026.</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.insertBefore(newGroup, container.firstChild);
+            refreshEditableStates();
+        }
+
+        function addPublicationItem(btn) {
+            const list = btn.closest('.pub-year-group').querySelector('.pub-list');
+            const newItem = document.createElement('div');
+            newItem.className = 'pub-item';
+            newItem.innerHTML = `
+                <button class="btn-delete-item admin-control" onclick="this.parentElement.remove()" style="position: absolute; right: 10px; top: 10px; z-index: 5;">🗑️ 삭제</button>
+                <img class="pub-thumbnail" src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=150" alt="Paper Thumbnail">
+                <div class="pub-details">
+                    <input type="text" class="admin-img-url-input" value="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=150" oninput="updatePubThumbnail(this)" placeholder="논문 썸네일 URL 주소">
+                    <p contenteditable="true" style="margin: 5px 0 0 0;"><strong>Lee, W.</strong>, "새 논문 제목" <em>저널명 입력</em>, 연도.</p>
+                </div>
+            `;
+            list.appendChild(newItem);
+            refreshEditableStates();
+        }
+
+        function addStudentItem() {
+            const grid = document.getElementById('student-grid');
+            const newItem = document.createElement('div');
+            newItem.className = 'student-item';
+            newItem.innerHTML = `
+                <button class="btn-delete-item admin-control" onclick="this.parentElement.remove()" style="position: absolute; right: 8px; top: 8px; z-index: 5; padding: 2px 6px;">🗑️</button>
+                <img class="student-photo" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=150" alt="Student Photo">
+                <input type="text" class="admin-img-url-input" value="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=150" oninput="updateStudentPhoto(this)" placeholder="프로필 사진 URL">
+                <div class="student-name" contenteditable="true">학생 이름 입력</div>
+                <div class="student-detail" contenteditable="true">석사과정 / 학부 연구생</div>
+                <div class="student-detail" contenteditable="true">연구분야: 세부 주제</div>
+            `;
+            grid.appendChild(newItem);
+            refreshEditableStates();
+        }
+
+        function addGalleryItem() {
+            const grid = document.getElementById('gallery-grid');
+            const newItem = document.createElement('div');
+            newItem.className = 'gallery-item';
+            newItem.innerHTML = `
+                <button class="btn-delete-item admin-control" onclick="this.parentElement.remove()" style="position: absolute; right: 10px; top: 10px; z-index: 5;">🗑️ 삭제</button>
+                <div class="gallery-img-placeholder" style="background-image: url('https://images.unsplash.com/photo-1507668077129-56e32842fceb?q=80&w=600');" onclick="openLightbox(this)"></div>
+                <input type="text" class="admin-img-url-input" value="https://images.unsplash.com/photo-1507668077129-56e32842fceb?q=80&w=600" oninput="updateGalleryImage(this)" placeholder="이미지 URL 주소" style="width: calc(100% - 30px); margin: 8px 15px 0 15px;">
+                <div class="gallery-info">
+                    <h4 contenteditable="true">새로운 연구소 이벤트</h4>
+                    <p contenteditable="true">갤러리 사진에 대한 유익한 설명을 덧붙이세요.</p>
+                </div>
+            `;
+            grid.appendChild(newItem);
+            refreshEditableStates();
+        }
+
+        // 새로 생성된 엘리먼트들의 편집 허용 상태 동기화
+        function refreshEditableStates() {
+            const isAdmin = document.body.classList.contains('admin-active');
+            const editableElements = document.querySelectorAll('#main-content [contenteditable]');
+            editableElements.forEach(elem => {
+                elem.setAttribute('contenteditable', isAdmin ? 'true' : 'false');
+            });
+        }
+
+        function addCourseItem() {
+            const list = document.getElementById('courses-list');
+            const newItem = document.createElement('div');
+            newItem.className = 'course-item';
+            newItem.innerHTML = `
+                <span contenteditable="true"><strong>개설 과목명 (Course Name):</strong> 과목에 핵심 원리나 목적을 간략하게 작성하세요.</span>
+                <button class="btn-delete-item admin-control" onclick="this.parentElement.remove()">🗑️ 삭제</button>
+            `;
+            list.appendChild(newItem);
+            refreshEditableStates();
+        }
+
+        function addContactItem() {
+            const container = document.getElementById('contact-info-container');
+            const newItem = document.createElement('div');
+            newItem.className = 'course-item';
+            newItem.style.cssText = "border: none; padding: 0 0 10px 0; background: transparent; margin: 0;";
+            newItem.innerHTML = `
+                <span contenteditable="true"><strong>새 항목명:</strong> 세부 주소나 연락처 내용을 입력하세요.</span>
+                <button class="btn-delete-item admin-control" onclick="this.parentElement.remove()">🗑️ 삭제</button>
+            `;
+            container.appendChild(newItem);
+            refreshEditableStates();
+        }
+
+        // 비밀번호 없이 즉각 진입하는 관리자 모드 활성화 함수
+        function enterAdminMode() {
+            document.body.classList.add('admin-active');
+            document.getElementById('admin-panel').style.display = 'flex';
+
+            const editableElements = document.querySelectorAll('[contenteditable]');
+            editableElements.forEach(elem => {
+                elem.setAttribute('contenteditable', 'true');
+            });
+            alert("🔧 관리자 모드가 활성화되었습니다.\n\n[수정 가이드]\n1. 수정할 영역의 글씨를 마우스로 자유롭게 선택하여 변경하세요.\n2. 특정 단어에 볼드/링크 등의 서식을 걸려면 해당 단어를 드래그하여 상단 바의 도구들을 사용하세요.\n3. 수정 완료 후 반드시 상단 노란색 제어바의 [원본 백업] 혹은 [클린 버전 다운로드]를 활용해 데이터를 다운로드해 주십시오.");
+        }
+
+        function exitAdminMode() {
+            document.body.classList.remove('admin-active');
+            document.getElementById('admin-panel').style.display = 'none';
+
+            const editableElements = document.querySelectorAll('[contenteditable]');
+            editableElements.forEach(elem => {
+                elem.setAttribute('contenteditable', 'false');
+            });
+            alert("관리자 모드가 해제되었습니다.");
+        }
+
+        // 1. [관리용] 원본 백업 HTML 내보내기 (admin.html)
+        function saveAndExportAdminHTML() {
+            // 브라우저 캐시용 LocalStorage 저장 (v4 최신)
+            localStorage.setItem('lab_web_content_v4', document.getElementById('main-content').innerHTML);
+            localStorage.setItem('lab_header_title_v4', document.getElementById('header-title').innerText);
+            localStorage.setItem('lab_header_sub_v4', document.getElementById('header-sub').innerText);
+
+            // 관리자 UI 비활성화 상태의 원본 추출
+            document.body.classList.remove('admin-active');
+            document.getElementById('admin-panel').style.display = 'none';
+
+            const editableElements = document.querySelectorAll('[contenteditable]');
+            editableElements.forEach(elem => {
+                elem.setAttribute('contenteditable', 'false');
+            });
+
+            // 원본 HTML 소스코드 완성
+            const currentHTML = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+
+            // 다운로드 링크 작동
+            const blob = new Blob([currentHTML], { type: "text/html;charset=utf-8" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "admin.html"; // 수정 기능 포함 원본 파일명 명시
+            link.click();
+
+            // 관리자 모드 UI 복구
+            document.body.classList.add('admin-active');
+            document.getElementById('admin-panel').style.display = 'flex';
+            editableElements.forEach(elem => {
+                elem.setAttribute('contenteditable', 'true');
+            });
+
+            alert("💾 [관리용 원본 백업 완료!]\n\n원클릭 수정 기능이 포함된 'admin.html' 파일이 다운로드되었습니다. 이 파일은 연구실 대표 컴퓨터 등 안전한 로컬 저장소에 보관해 두시고 편집 시에 더블클릭해 사용하세요.");
+        }
+
+        // 2. [배포용] 관리자 모드가 완전히 영구 제거된 일반 사용자용 클린본 내보내기 (index.html)
+        function saveAndExportCleanHTML() {
+            // 브라우저 캐시용 LocalStorage 저장 (v4 최신)
+            localStorage.setItem('lab_web_content_v4', document.getElementById('main-content').innerHTML);
+            localStorage.setItem('lab_header_title_v4', document.getElementById('header-title').innerText);
+            localStorage.setItem('lab_header_sub_v4', document.getElementById('header-sub').innerText);
+
+            // 가상 복사본(Clone) 생성
+            const clone = document.documentElement.cloneNode(true);
+
+            // 복사본 내에서 모든 관리자용 UI 요소 영구 삭제
+            const adminPanel = clone.querySelector('#admin-panel');
+            if (adminPanel) adminPanel.remove();
+
+            const loginBtnContainer = clone.querySelector('.admin-btn-container');
+            if (loginBtnContainer) loginBtnContainer.remove();
+
+            const adminControls = clone.querySelectorAll('.admin-control');
+            adminControls.forEach(el => el.remove());
+
+            const adminInputs = clone.querySelectorAll('.admin-img-url-input');
+            adminInputs.forEach(el => el.remove());
+
+            // 편집 속성(contenteditable) 흔적 완전히 박멸
+            const editables = clone.querySelectorAll('[contenteditable]');
+            editables.forEach(el => el.removeAttribute('contenteditable'));
+
+            // 관리자 여백 CSS 및 활성 클래스 강제 정리
+            const body = clone.querySelector('body');
+            if (body) {
+                body.classList.remove('admin-active');
+                body.style.paddingTop = '0px';
+            }
+
+            // 가상의 배포용 클린 HTML 소스코드 완성
+            const cleanHTML = "<!DOCTYPE html>\n" + clone.outerHTML;
+
+            // 다운로드 실행
+            const blob = new Blob([cleanHTML], { type: "text/html;charset=utf-8" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "index.html"; // 배포를 위한 공식 명칭 지정
+            link.click();
+
+            alert("🌐 [배포용 일반 사이트 다운로드 성공!]\n\n관리자 진입 버튼, 서식 툴바, 추가/삭제 버튼, 이미지 URL 입력 인풋들이 코드 상에서 완전히 삭제된 깨끗한 'index.html' 파일이 생성되었습니다.\n\n이 파일을 그대로 GitHub에 올리시면 외부 보안 우려 없이 빠르고 안전한 상태로 전 세계에 배포됩니다!");
+        }
+    </script>
+
+</body></html>
