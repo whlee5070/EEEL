@@ -1278,7 +1278,8 @@
                 }
             });
 
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+	    setTimeout(() => window.scrollTo({ top: 0, behavior: 'auto' }), 1);
         }
 
         // 로컬 편집 유지를 위한 브라우저 저장소 데이터 불러오기 (v4 최신 캐시 적용)
