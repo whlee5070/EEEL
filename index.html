@@ -132,13 +132,6 @@
             align-items: center;
         }
 
-        /* 텍스트 편집 시 적용될 수 있는 하이퍼링크 스타일 */
-        [contenteditable="true"] a {
-            color: var(--accent-color) !important;
-            text-decoration: underline !important;
-            font-weight: bold;
-        }
-
         /* 홈 섹션 히어로 영역 */
         .hero {
             background: linear-gradient(135deg, #f5f8ff 0%, #e6eefc 100%);
@@ -544,167 +537,14 @@
             margin: 5px 0;
             font-size: 0.9rem;
         }
-
-        /* 관리자 기능 UI */
-        .admin-btn-container {
-            margin-top: 15px;
-        }
-
-        .btn-admin {
-            background-color: #444;
-            color: #fff;
-            border: none;
-            padding: 6px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            transition: background 0.2s;
-        }
-
-        .btn-admin:hover {
-            background-color: var(--accent-color);
-        }
-
-        /* 관리자 상단 컨트롤 바 */
-        #admin-panel {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: #ffc107;
-            color: #212529;
-            padding: 10px 20px;
-            text-align: center;
-            font-weight: bold;
-            z-index: 9999;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        #admin-panel button {
-            background-color: #212529;
-            color: white;
-            border: none;
-            padding: 6px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        #admin-panel button:hover {
-            background-color: #424649;
-        }
-
-        /* 텍스트 포맷터 컴포넌트 */
-        .editor-toolbar {
-            display: inline-flex;
-            gap: 4px;
-            background-color: rgba(0, 0, 0, 0.1);
-            padding: 4px;
-            border-radius: 6px;
-            border: 1px solid rgba(0, 0, 0, 0.15);
-            margin: 0 10px;
-        }
-
-        .editor-toolbar button {
-            background-color: #fff !important;
-            color: #333 !important;
-            border: 1px solid #ccc !important;
-            padding: 3px 8px !important;
-            font-size: 0.8rem !important;
-            border-radius: 4px !important;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.2s;
-        }
-
-        .editor-toolbar button:hover {
-            background-color: #e2e8f0 !important;
-        }
-
-        body.admin-active {
-            padding-top: 50px; /* 관리자 바 여백 */
-        }
-
-        /* 관리자 편집 활성화 스타일 */
-        body.admin-active [contenteditable="true"] {
-            outline: var(--admin-border);
-            background-color: #fffae6;
-            cursor: text;
-        }
-
-        body.admin-active [contenteditable="true"]:hover {
-            background-color: #fff3cd;
-        }
-
-        /* 관리자 전용 제어기 스타일 (기본 숨김) */
-        .admin-control {
-            display: none !important;
-        }
-
-        body.admin-active .admin-control {
-            display: inline-flex !important;
-            align-items: center;
-            gap: 5px;
-        }
-
-        /* 동적 추가 / 삭제 버튼 전용 데코레이션 */
-        .btn-add-section {
-            background-color: #28a745;
-            color: white;
-            border: none;
-            padding: 5px 12px;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.2s;
-        }
-
-        .btn-add-section:hover {
-            background-color: #218838;
-        }
-
-        .btn-delete-item {
-            background-color: #dc3545;
-            color: white;
-            border: none;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.2s;
-        }
-
-        .btn-delete-item:hover {
-            background-color: #c82333;
-        }
-
-        .admin-img-url-input {
-            display: none;
-            width: 100%;
-            margin-top: 8px;
-            font-size: 0.8rem;
-            padding: 5px;
-            box-sizing: border-box;
-            border: 1px dashed var(--accent-color);
-            background-color: #fffdf5;
-            border-radius: 4px;
-        }
-
-        body.admin-active .admin-img-url-input {
-            display: block;
-        }
     </style>
-</head>
-<body class="" style="padding-top: 0px;">
 
-    <!-- 관리자 컨트롤 패널 -->
+    
+    
+</head>
+<body>
+
+    
     
 
     <header>
@@ -727,7 +567,7 @@
 
     <div class="container" id="main-content">
 
-        <!-- Home Section -->
+        
         <section id="home" class="page-section active">
             <h2>
                 <span id="home-title">Welcome to EEEL!</span>
@@ -738,18 +578,18 @@
                 <p id="hero-text">The <b>Energy &amp; Environmental Engineering Lab (EEEL)</b> is dedicated to pioneering the transition toward a carbon-negative world through innovative process engineering and molecular-scale science. Our research focuses on developing transformative technologies to address the global climate crisis and resource scarcity, primarily leveraging clathrate hydrate technology for efficient CO2 capture, energy carrier storage, and advanced water treatment. Simultaneously, we are advancing the hydrogen economy by engineering thermochemical pathways for biomass upcycling. By bridging the gap between fundamental chemical thermodynamics and scalable engineering solutions, EEEL strives to create a sustainable synergy between energy production and environmental preservation, providing the technical foundation for a cleaner future.&nbsp;<br><br></p>
             </div>
 
-            <!-- 홈 화면 3단 사진 영역 -->
+            
             <div class="home-photos-grid" id="home-photos-grid">
-                <!-- 사진 1 -->
+                
                 <div class="home-photo-item">
                     
                     <img class="home-photo-img" src="https://images.unsplash.com/photo-1606206873764-fd15e242df52?q=80&amp;w=1740&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Lab Research Environment">
                     
                     <div class="home-photo-caption">Engineering</div>
                 </div>
-                <!-- 사진 2 -->
                 
-                <!-- 사진 3 -->
+
+                
                 <div class="home-photo-item">
                     
                     <img class="home-photo-img" src="https://images.unsplash.com/photo-1655720845034-b8f615109b5b?q=80&amp;w=2064&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Seminar and Discussion">
@@ -761,7 +601,7 @@
             <p id="home-subtext"><br></p>
         </section>
 
-        <!-- News Section -->
+        
         <section id="news" class="page-section">
             <h2>
                 <span id="news-title">News &amp; Announcements</span>
@@ -779,7 +619,7 @@
             </div>
         </section>
 
-        <!-- Research Section -->
+        
         <section id="research" class="page-section">
             <h2>
                 <span id="research-title">Research Areas</span>
@@ -788,7 +628,7 @@
             <p id="research-intro">EEEL의 핵심 연구 영역 및 학술 가치입니다.</p>
 
             <div class="grid-3" id="research-grid">
-                <!-- Research Card 1 -->
+                
                 <div class="card">
                     
                     <img class="card-img" src="https://images.unsplash.com/photo-1763259109366-72c37c673299?q=80&amp;w=2064&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Marine Biomass">
@@ -796,7 +636,7 @@
                     <h3 id="res-card-t1">Gas treatment</h3>
                     <p id="res-card-p1">물 기반 다공성 물질인 클러스레이트 하이드레이트 (Clathrate hydrate)를 이용한 에너지 캐리어 저장, 탄소 포집 및 가스 정제에 대한 연구를 진행하고 있습니다.</p>
                 </div>
-                <!-- Research Card 2 -->
+                
                 <div class="card">
                     
                     <img class="card-img" src="https://images.unsplash.com/photo-1519455953755-af066f52f1a6?q=80&amp;w=774&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Metal Uptake">
@@ -804,7 +644,7 @@
                     <h3 id="res-card-t2">Wastewater treatment</h3>
                     <p id="res-card-p2">해조류를 이용한 금속 흡착, 그리고 클러스레이트 하이드레이트를 이용한 금속 분리 기법을 통해 폐수 처리 및 해수담수화에 관한 연구를 진행하고 있습니다.</p>
                 </div>
-                <!-- Research Card 3 -->
+                
                 <div class="card">
                     
                     <img class="card-img" src="https://images.unsplash.com/photo-1637310934931-599fde9b0db0?q=80&amp;w=2064&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Biohydrogen">
@@ -815,7 +655,7 @@
             </div>
         </section>
 
-        <!-- Publications Section -->
+        
         <section id="publications" class="page-section">
             <h2>
                 <span id="pub-title">Publications</span>
@@ -824,7 +664,7 @@
             <p id="pub-intro"><a href="https://scholar.google.com/citations?user=pJN4EwYAAAAJ" target="_blank">Google Schoar</a></p>
 
             <div id="pub-year-container">
-                <!-- 2025 Group -->
+                
                 <div class="pub-year-group">
                     <div class="pub-year">
                         <span>2026</span>
@@ -849,7 +689,7 @@
             </div></div>
                 </div>
 
-                <!-- 2024 Group -->
+                
                 <div class="pub-year-group">
                     <div class="pub-year">
                         <span>2025</span>
@@ -909,7 +749,7 @@
             </div></div>
                 </div>
 
-                <!-- 2023 Group -->
+                
                 <div class="pub-year-group">
                     <div class="pub-year">
                         <span>2024</span>
@@ -1070,7 +910,7 @@
                     
                 </div>
                 <div class="pub-list">
-                    
+
                 <div class="pub-item">
                 
                 <img class="pub-thumbnail" src="https://pubs.acs.org/cms/10.1021/acs.iecr.8b05869/asset/images/medium/ie-2018-058696_0001.gif" alt="Paper Thumbnail">
@@ -1082,14 +922,14 @@
             </div>
         </section>
 
-        <!-- Members Section -->
+        
         <section id="members" class="page-section">
             <h2>
                 <span id="members-title">Members</span>
             </h2>
 
             <div class="member-container" id="members-container">
-                <!-- Principal Investigator (지도교수 개별 카드) -->
+                
                 <div class="card member-card">
                     
                     <img class="member-photo" src="https://scholar.googleusercontent.com/citations?view_op=view_photo&amp;user=pJN4EwYAAAAJ&amp;citpid=11&amp;authuser=2" alt="PI Photo">
@@ -1100,7 +940,7 @@
                     </div>
                 </div>
 
-                <!-- Students & Researchers (동일 박스 내 그리드 배치 구조) -->
+                
                 <div class="card" style="width: 100%; box-sizing: border-box;">
                     <h3 style="margin-top: 0; color: var(--primary-color); font-size: 1.4rem; border-bottom: 2px solid var(--primary-color); padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
                         <span id="students-box-title">Students &amp; Researchers</span>
@@ -1110,7 +950,7 @@
                     <p id="students-recruitment-text" style="background-color: #f4f8fc; padding: 15px; border-radius: 6px; border-left: 4px solid var(--primary-color); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">We are looking for motivated undergraduate / graduate students who are specifically interested in the fields of CCUS (Carbon Capture, Utilization, and Storage), biomass upcycling, and wastewater treatment. If you are eager to gain research experience and contribute to environmental sustainability, please reach out.<br><b>e-mail: whlee5070@hongik.ac.kr</b></p>
 
                     <div class="student-grid" id="student-grid">
-                        <!-- Student 1 -->
+                        
                         <div class="student-item">
                             
                             <img class="student-photo" src="images/Members/profile_yujeong_kwon.jpg" alt="Student Photo">
@@ -1119,7 +959,7 @@
                             <div class="student-detail">학부 연구생 (Undergraduate)</div>
                             <div class="student-detail">연구분야: Biomass upcycling</div>
                         </div>
-                        <!-- Student 2 -->
+                        
                         <div class="student-item">
                             
                             <img class="student-photo" src="images/Members/profile_chaewon_kim.jpg" alt="Student Photo">
@@ -1153,21 +993,22 @@
                 </div>
             </div>
 
-		<!-- Alumni (동일 박스 내 그리드 배치 구조) -->
+
+		
                 <div class="card" style="width: 100%; box-sizing: border-box;">
                     <h3 style="margin-top: 0; color: var(--primary-color); font-size: 1.4rem; border-bottom: 2px solid var(--primary-color); padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
                         <span id="students-box-title">Alumni</span>
                         
                     </h3>
                     <div class="student-grid" id="student-grid">
-                        <!-- Student 1 -->
                         
-                        <!-- Student 2 -->
+
                         
+
                     </div>
         </div></section>
 
-        <!-- Gallery Section -->
+        
         <section id="gallery" class="page-section">
             <h2>
                 <span id="gallery-title">Gallery</span>
@@ -1176,7 +1017,7 @@
             <p id="gallery-intro">연구실의 학회 참여, 실험실 활동 등 다양한 연구 활동 사진첩입니다.</p>
 
             <div class="gallery-grid" id="gallery-grid">
-                <!-- 아이템 1 -->
+                
                 <div class="gallery-item">
                     
                     <div class="gallery-img-placeholder" style="background-image: url(&quot;https://photo.hongik.ac.kr/app/board/attach/image/81409_1751208588000.do&quot;);" onclick="openLightbox(this)"></div>
@@ -1186,14 +1027,14 @@
                         <p id="g-item-p1">홍익대학교</p>
                     </div>
                 </div>
-                <!-- 아이템 2 -->
                 
-                <!-- 아이템 3 -->
+
                 
+
             </div>
         </section>
 
-        <!-- Courses Section -->
+        
         <section id="courses" class="page-section">
             <h2>
                 <span id="courses-title">Courses</span>
@@ -1214,12 +1055,12 @@
                     <span><strong>화공양론 (Chemical Engineering Calculation):</strong>&nbsp;Spring 2026</span>
                     
                 </div>
-                
-                
+
+
             </div>
         </section>
 
-        <!-- Contact Section -->
+        
         <section id="contact" class="page-section">
             <h2>
                 <span id="contact-title">Contact Us</span>
@@ -1244,7 +1085,7 @@
 
     </div>
 
-    <!-- 이미지 라이트박스 팝업 모달 -->
+    
     <div id="lightbox-modal" class="lightbox-modal" onclick="closeLightbox()" style="display: none;">
         <span class="lightbox-close" onclick="closeLightbox()">×</span>
         <img class="lightbox-content" id="lightbox-img" onclick="event.stopPropagation()" src="https://photo.hongik.ac.kr/app/board/attach/image/81409_1751208588000.do">
@@ -1282,18 +1123,8 @@
 	    setTimeout(() => window.scrollTo({ top: 0, behavior: 'auto' }), 1);
         }
 
-        // 로컬 편집 유지를 위한 브라우저 저장소 데이터 불러오기 (v4 최신 캐시 적용)
+        // 페이지 로드 시 URL 해시(#섹션)에 따라 해당 섹션 활성화 (공개용 공통 동작)
         window.addEventListener('DOMContentLoaded', () => {
-            const savedContent = localStorage.getItem('lab_web_content_v4');
-            if (savedContent) {
-                document.getElementById('main-content').innerHTML = savedContent;
-            }
-            const savedHeaderTitle = localStorage.getItem('lab_header_title_v4');
-            if (savedHeaderTitle) document.getElementById('header-title').innerText = savedHeaderTitle;
-
-            const savedHeaderSub = localStorage.getItem('lab_header_sub_v4');
-            if (savedHeaderSub) document.getElementById('header-sub').innerText = savedHeaderSub;
-
             const hash = window.location.hash.substring(1);
             if (hash) {
                 navigateTo(hash);
@@ -1336,354 +1167,9 @@
         function closeLightbox() {
             document.getElementById('lightbox-modal').style.display = "none";
         }
-
-        // 이미지 경로 실시간 동기화 바인딩 함수들
-        function updateImageSource(inputElem) {
-            inputElem.setAttribute('value', inputElem.value);
-            const img = inputElem.previousElementSibling;
-            if (img && img.tagName === 'IMG') {
-                img.src = inputElem.value;
-            }
-        }
-
-        // 홈화면 및 썸네일/프로필 동적 이미지 업데이트 바인딩
-        function updateHomePhoto(inputElem) {
-            inputElem.setAttribute('value', inputElem.value);
-            const img = inputElem.closest('.home-photo-item').querySelector('.home-photo-img');
-            if (img) {
-                img.src = inputElem.value;
-            }
-        }
-
-        function updatePubThumbnail(inputElem) {
-            inputElem.setAttribute('value', inputElem.value);
-            const img = inputElem.closest('.pub-item').querySelector('.pub-thumbnail');
-            if (img) {
-                img.src = inputElem.value;
-            }
-        }
-
-        function updateMemberPhoto(inputElem) {
-            inputElem.setAttribute('value', inputElem.value);
-            const img = inputElem.closest('.member-card').querySelector('.member-photo');
-            if (img) {
-                img.src = inputElem.value;
-            }
-        }
-
-        function updateStudentPhoto(inputElem) {
-            inputElem.setAttribute('value', inputElem.value);
-            const img = inputElem.closest('.student-item').querySelector('.student-photo');
-            if (img) {
-                img.src = inputElem.value;
-            }
-        }
-
-        function updateGalleryImage(inputElem) {
-            inputElem.setAttribute('value', inputElem.value);
-            const placeholder = inputElem.previousElementSibling;
-            if (placeholder && placeholder.classList.contains('gallery-img-placeholder')) {
-                placeholder.style.backgroundImage = `url('${inputElem.value}')`;
-            }
-        }
-
-        // 텍스트 볼드, 이탤릭, 하이퍼링크 생성 기능 구현
-        function applyFormat(command) {
-            if (!document.body.classList.contains('admin-active')) return;
-
-            if (command === 'createLink') {
-                const url = prompt("연결할 URL 주소를 입력하세요 (새 탭에서 열리도록 자동 지정됩니다):", "https://");
-                if (url) {
-                    document.execCommand('createLink', false, url);
-
-                    const selection = window.getSelection();
-                    if (selection.rangeCount > 0) {
-                        const container = selection.getRangeAt(0).commonAncestorContainer;
-                        const parentNode = container.nodeType === 3 ? container.parentNode : container;
-                        if (parentNode.tagName === 'A') {
-                            parentNode.setAttribute('target', '_blank');
-                        } else {
-                            const links = parentNode.querySelectorAll('a');
-                            links.forEach(link => {
-                                if (link.getAttribute('href') === url) {
-                                    link.setAttribute('target', '_blank');
-                                }
-                            });
-                        }
-                    }
-                }
-            } else {
-                document.execCommand(command, false, null);
-            }
-        }
-
-        // 동적 콘텐츠 추가용 관리자 함수들
-        function addHomePhoto() {
-            const grid = document.getElementById('home-photos-grid');
-            const newItem = document.createElement('div');
-            newItem.className = 'home-photo-item';
-            newItem.innerHTML = `
-                <button class="btn-delete-item admin-control" onclick="this.parentElement.remove()" style="position: absolute; right: 8px; top: 8px; z-index: 5; padding: 2px 6px;">🗑️</button>
-                <img class="home-photo-img" src="https://images.unsplash.com/photo-1532187863486-abf9d39d66e8?q=80&w=400" alt="New Home Photo">
-                <input type="text" class="admin-img-url-input" value="https://images.unsplash.com/photo-1532187863486-abf9d39d66e8?q=80&w=400" oninput="updateHomePhoto(this)" placeholder="이미지 상대경로 또는 URL">
-                <div class="home-photo-caption" contenteditable="true">새로운 연구소 활동</div>
-            `;
-            grid.appendChild(newItem);
-            refreshEditableStates();
-        }
-
-        // 동적 새 소식 추가 기능
-        function addNewsItem() {
-            const list = document.getElementById('news-list');
-            const newItem = document.createElement('div');
-            newItem.className = 'news-item';
-
-            const now = new Date();
-            const year = now.getFullYear();
-            const month = String(now.getMonth() + 1).padStart(2, '0');
-            const date = String(now.getDate()).padStart(2, '0');
-            const todayStr = `${year}-${month}-${date}`;
-
-            newItem.innerHTML = `
-                <button class="btn-delete-item admin-control" onclick="this.parentElement.remove()" style="position: absolute; right: 10px; top: 10px; z-index: 5;">🗑️ 삭제</button>
-                <div class="news-date" contenteditable="true">${todayStr}</div>
-                <div class="news-title" contenteditable="true">새 소식 및 연구 성과 알림</div>
-                <div class="news-desc" contenteditable="true">새로운 연구 공지 및 성과 내용을 직접 수정하여 작성하세요.</div>
-            `;
-            list.insertBefore(newItem, list.firstChild);
-            refreshEditableStates();
-        }
-
-        function addResearchCard() {
-            const grid = document.getElementById('research-grid');
-            const newCard = document.createElement('div');
-            newCard.className = 'card';
-            newCard.innerHTML = `
-                <button class="btn-delete-item admin-control" onclick="this.parentElement.remove()" style="position: absolute; right: 10px; top: 10px; z-index: 5;">🗑️ 삭제</button>
-                <img class="card-img" src="https://images.unsplash.com/photo-1507668077129-56e32842fceb?q=80&w=600" alt="New Research Area">
-                <input type="text" class="admin-img-url-input" value="https://images.unsplash.com/photo-1507668077129-56e32842fceb?q=80&w=600" oninput="updateImageSource(this)" placeholder="카드 이미지 URL 주소">
-                <h3 contenteditable="true">새 연구 분야</h3>
-                <p contenteditable="true">새로운 연구 영역에 관한 소개글을 직접 작성하세요.</p>
-            `;
-            grid.appendChild(newCard);
-            refreshEditableStates();
-        }
-
-        function addPubYearGroup() {
-            const container = document.getElementById('pub-year-container');
-            const newGroup = document.createElement('div');
-            newGroup.className = 'pub-year-group';
-            newGroup.innerHTML = `
-                <div class="pub-year">
-                    <span contenteditable="true">2026</span>
-                    <div class="admin-control">
-                        <button class="btn-add-section" onclick="addPublicationItem(this)" style="padding: 2px 8px; font-size: 0.75rem;">+ 논문 추가</button>
-                        <button class="btn-delete-item" onclick="this.closest('.pub-year-group').remove()" style="padding: 2px 8px; font-size: 0.75rem;">🗑️ 그룹 삭제</button>
-                    </div>
-                </div>
-                <div class="pub-list">
-                    <div class="pub-item">
-                        <button class="btn-delete-item admin-control" onclick="this.parentElement.remove()" style="position: absolute; right: 10px; top: 10px; z-index: 5;">🗑️ 삭제</button>
-                        <img class="pub-thumbnail" src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=150" alt="Paper Thumbnail">
-                        <div class="pub-details">
-                            <input type="text" class="admin-img-url-input" value="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=150" oninput="updatePubThumbnail(this)" placeholder="논문 썸네일 URL 주소">
-                            <p contenteditable="true" style="margin: 5px 0 0 0;"><strong>Lee, W.</strong>, "새 논문 제목" <em>저널명 입력</em>, 2026.</p>
-                        </div>
-                    </div>
-                </div>
-            `;
-            container.insertBefore(newGroup, container.firstChild);
-            refreshEditableStates();
-        }
-
-        function addPublicationItem(btn) {
-            const list = btn.closest('.pub-year-group').querySelector('.pub-list');
-            const newItem = document.createElement('div');
-            newItem.className = 'pub-item';
-            newItem.innerHTML = `
-                <button class="btn-delete-item admin-control" onclick="this.parentElement.remove()" style="position: absolute; right: 10px; top: 10px; z-index: 5;">🗑️ 삭제</button>
-                <img class="pub-thumbnail" src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=150" alt="Paper Thumbnail">
-                <div class="pub-details">
-                    <input type="text" class="admin-img-url-input" value="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=150" oninput="updatePubThumbnail(this)" placeholder="논문 썸네일 URL 주소">
-                    <p contenteditable="true" style="margin: 5px 0 0 0;"><strong>Lee, W.</strong>, "새 논문 제목" <em>저널명 입력</em>, 연도.</p>
-                </div>
-            `;
-            list.appendChild(newItem);
-            refreshEditableStates();
-        }
-
-        function addStudentItem() {
-            const grid = document.getElementById('student-grid');
-            const newItem = document.createElement('div');
-            newItem.className = 'student-item';
-            newItem.innerHTML = `
-                <button class="btn-delete-item admin-control" onclick="this.parentElement.remove()" style="position: absolute; right: 8px; top: 8px; z-index: 5; padding: 2px 6px;">🗑️</button>
-                <img class="student-photo" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=150" alt="Student Photo">
-                <input type="text" class="admin-img-url-input" value="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=150" oninput="updateStudentPhoto(this)" placeholder="프로필 사진 URL">
-                <div class="student-name" contenteditable="true">학생 이름 입력</div>
-                <div class="student-detail" contenteditable="true">석사과정 / 학부 연구생</div>
-                <div class="student-detail" contenteditable="true">연구분야: 세부 주제</div>
-            `;
-            grid.appendChild(newItem);
-            refreshEditableStates();
-        }
-
-        function addGalleryItem() {
-            const grid = document.getElementById('gallery-grid');
-            const newItem = document.createElement('div');
-            newItem.className = 'gallery-item';
-            newItem.innerHTML = `
-                <button class="btn-delete-item admin-control" onclick="this.parentElement.remove()" style="position: absolute; right: 10px; top: 10px; z-index: 5;">🗑️ 삭제</button>
-                <div class="gallery-img-placeholder" style="background-image: url('https://images.unsplash.com/photo-1507668077129-56e32842fceb?q=80&w=600');" onclick="openLightbox(this)"></div>
-                <input type="text" class="admin-img-url-input" value="https://images.unsplash.com/photo-1507668077129-56e32842fceb?q=80&w=600" oninput="updateGalleryImage(this)" placeholder="이미지 URL 주소" style="width: calc(100% - 30px); margin: 8px 15px 0 15px;">
-                <div class="gallery-info">
-                    <h4 contenteditable="true">새로운 연구소 이벤트</h4>
-                    <p contenteditable="true">갤러리 사진에 대한 유익한 설명을 덧붙이세요.</p>
-                </div>
-            `;
-            grid.appendChild(newItem);
-            refreshEditableStates();
-        }
-
-        // 새로 생성된 엘리먼트들의 편집 허용 상태 동기화
-        function refreshEditableStates() {
-            const isAdmin = document.body.classList.contains('admin-active');
-            const editableElements = document.querySelectorAll('#main-content [contenteditable]');
-            editableElements.forEach(elem => {
-                elem.setAttribute('contenteditable', isAdmin ? 'true' : 'false');
-            });
-        }
-
-        function addCourseItem() {
-            const list = document.getElementById('courses-list');
-            const newItem = document.createElement('div');
-            newItem.className = 'course-item';
-            newItem.innerHTML = `
-                <span contenteditable="true"><strong>개설 과목명 (Course Name):</strong> 과목에 핵심 원리나 목적을 간략하게 작성하세요.</span>
-                <button class="btn-delete-item admin-control" onclick="this.parentElement.remove()">🗑️ 삭제</button>
-            `;
-            list.appendChild(newItem);
-            refreshEditableStates();
-        }
-
-        function addContactItem() {
-            const container = document.getElementById('contact-info-container');
-            const newItem = document.createElement('div');
-            newItem.className = 'course-item';
-            newItem.style.cssText = "border: none; padding: 0 0 10px 0; background: transparent; margin: 0;";
-            newItem.innerHTML = `
-                <span contenteditable="true"><strong>새 항목명:</strong> 세부 주소나 연락처 내용을 입력하세요.</span>
-                <button class="btn-delete-item admin-control" onclick="this.parentElement.remove()">🗑️ 삭제</button>
-            `;
-            container.appendChild(newItem);
-            refreshEditableStates();
-        }
-
-        // 비밀번호 없이 즉각 진입하는 관리자 모드 활성화 함수
-        function enterAdminMode() {
-            document.body.classList.add('admin-active');
-            document.getElementById('admin-panel').style.display = 'flex';
-
-            const editableElements = document.querySelectorAll('[contenteditable]');
-            editableElements.forEach(elem => {
-                elem.setAttribute('contenteditable', 'true');
-            });
-            alert("🔧 관리자 모드가 활성화되었습니다.\n\n[수정 가이드]\n1. 수정할 영역의 글씨를 마우스로 자유롭게 선택하여 변경하세요.\n2. 특정 단어에 볼드/링크 등의 서식을 걸려면 해당 단어를 드래그하여 상단 바의 도구들을 사용하세요.\n3. 수정 완료 후 반드시 상단 노란색 제어바의 [원본 백업] 혹은 [클린 버전 다운로드]를 활용해 데이터를 다운로드해 주십시오.");
-        }
-
-        function exitAdminMode() {
-            document.body.classList.remove('admin-active');
-            document.getElementById('admin-panel').style.display = 'none';
-
-            const editableElements = document.querySelectorAll('[contenteditable]');
-            editableElements.forEach(elem => {
-                elem.setAttribute('contenteditable', 'false');
-            });
-            alert("관리자 모드가 해제되었습니다.");
-        }
-
-        // 1. [관리용] 원본 백업 HTML 내보내기 (admin.html)
-        function saveAndExportAdminHTML() {
-            // 브라우저 캐시용 LocalStorage 저장 (v4 최신)
-            localStorage.setItem('lab_web_content_v4', document.getElementById('main-content').innerHTML);
-            localStorage.setItem('lab_header_title_v4', document.getElementById('header-title').innerText);
-            localStorage.setItem('lab_header_sub_v4', document.getElementById('header-sub').innerText);
-
-            // 관리자 UI 비활성화 상태의 원본 추출
-            document.body.classList.remove('admin-active');
-            document.getElementById('admin-panel').style.display = 'none';
-
-            const editableElements = document.querySelectorAll('[contenteditable]');
-            editableElements.forEach(elem => {
-                elem.setAttribute('contenteditable', 'false');
-            });
-
-            // 원본 HTML 소스코드 완성
-            const currentHTML = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
-
-            // 다운로드 링크 작동
-            const blob = new Blob([currentHTML], { type: "text/html;charset=utf-8" });
-            const link = document.createElement("a");
-            link.href = URL.createObjectURL(blob);
-            link.download = "admin.html"; // 수정 기능 포함 원본 파일명 명시
-            link.click();
-
-            // 관리자 모드 UI 복구
-            document.body.classList.add('admin-active');
-            document.getElementById('admin-panel').style.display = 'flex';
-            editableElements.forEach(elem => {
-                elem.setAttribute('contenteditable', 'true');
-            });
-
-            alert("💾 [관리용 원본 백업 완료!]\n\n원클릭 수정 기능이 포함된 'admin.html' 파일이 다운로드되었습니다. 이 파일은 연구실 대표 컴퓨터 등 안전한 로컬 저장소에 보관해 두시고 편집 시에 더블클릭해 사용하세요.");
-        }
-
-        // 2. [배포용] 관리자 모드가 완전히 영구 제거된 일반 사용자용 클린본 내보내기 (index.html)
-        function saveAndExportCleanHTML() {
-            // 브라우저 캐시용 LocalStorage 저장 (v4 최신)
-            localStorage.setItem('lab_web_content_v4', document.getElementById('main-content').innerHTML);
-            localStorage.setItem('lab_header_title_v4', document.getElementById('header-title').innerText);
-            localStorage.setItem('lab_header_sub_v4', document.getElementById('header-sub').innerText);
-
-            // 가상 복사본(Clone) 생성
-            const clone = document.documentElement.cloneNode(true);
-
-            // 복사본 내에서 모든 관리자용 UI 요소 영구 삭제
-            const adminPanel = clone.querySelector('#admin-panel');
-            if (adminPanel) adminPanel.remove();
-
-            const loginBtnContainer = clone.querySelector('.admin-btn-container');
-            if (loginBtnContainer) loginBtnContainer.remove();
-
-            const adminControls = clone.querySelectorAll('.admin-control');
-            adminControls.forEach(el => el.remove());
-
-            const adminInputs = clone.querySelectorAll('.admin-img-url-input');
-            adminInputs.forEach(el => el.remove());
-
-            // 편집 속성(contenteditable) 흔적 완전히 박멸
-            const editables = clone.querySelectorAll('[contenteditable]');
-            editables.forEach(el => el.removeAttribute('contenteditable'));
-
-            // 관리자 여백 CSS 및 활성 클래스 강제 정리
-            const body = clone.querySelector('body');
-            if (body) {
-                body.classList.remove('admin-active');
-                body.style.paddingTop = '0px';
-            }
-
-            // 가상의 배포용 클린 HTML 소스코드 완성
-            const cleanHTML = "<!DOCTYPE html>\n" + clone.outerHTML;
-
-            // 다운로드 실행
-            const blob = new Blob([cleanHTML], { type: "text/html;charset=utf-8" });
-            const link = document.createElement("a");
-            link.href = URL.createObjectURL(blob);
-            link.download = "index.html"; // 배포를 위한 공식 명칭 지정
-            link.click();
-
-            alert("🌐 [배포용 일반 사이트 다운로드 성공!]\n\n관리자 진입 버튼, 서식 툴바, 추가/삭제 버튼, 이미지 URL 입력 인풋들이 코드 상에서 완전히 삭제된 깨끗한 'index.html' 파일이 생성되었습니다.\n\n이 파일을 그대로 GitHub에 올리시면 외부 보안 우려 없이 빠르고 안전한 상태로 전 세계에 배포됩니다!");
-        }
     </script>
+
+    
+    
 
 </body></html>
