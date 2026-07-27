@@ -357,6 +357,11 @@
             margin: 0 0 10px 0;
         }
 
+        /* 멤버 박스(학생/졸업생) 사이 간격 확보 (구버전 캐시/구조 대비 안전망) */
+        #members > .card {
+            margin-top: 30px;
+        }
+
         /* 동일 카드 내 학생 그리드 배치 스타일 */
         .student-grid {
             display: grid;
@@ -403,6 +408,92 @@
             font-size: 0.85rem;
             color: #666;
             margin: 2px 0;
+        }
+
+        /* 학생/졸업생 카드 클릭 → 상세 프로필 팝업 (갤러리 라이트박스와 동일한 방식) */
+        .student-item {
+            cursor: pointer;
+        }
+        /* 카드에는 숨겨두고 팝업에서만 보여줄 상세 정보 저장용 블록 */
+        .student-detail-full {
+            display: none;
+        }
+
+        .profile-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 2500;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .profile-modal.open {
+            display: flex;
+        }
+        .profile-box {
+            background: #fff;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 520px;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 32px 30px;
+            position: relative;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+            animation: zoomIn 0.25s ease-out forwards;
+        }
+        .profile-close {
+            position: absolute;
+            top: 12px;
+            right: 18px;
+            font-size: 30px;
+            font-weight: bold;
+            color: #999;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .profile-close:hover {
+            color: var(--accent-color);
+        }
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-color);
+            display: block;
+            margin: 0 auto 16px auto;
+            background: #eee;
+        }
+        .profile-name {
+            text-align: center;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 18px;
+        }
+        .profile-detail {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #444;
+            min-height: 40px;
+        }
+        .profile-detail:empty::before {
+            content: "상세 정보가 아직 없습니다.";
+            color: #aaa;
+        }
+        body.admin-active .profile-detail[contenteditable="true"] {
+            outline: var(--admin-border);
+            background-color: #fffae6;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: text;
         }
 
         /* 갤러리 그리드 레이아웃 */
@@ -937,7 +1028,7 @@
                     <div class="member-info">
                         
                         <h3 id="pi-title">Principal Investigator</h3>
-                        <p id="pi-info"><strong>Wonhyeong Lee (이원형)</strong><br>Assistant Professor, Department of Chemical Engineering, Hongik University<br><br>03/2026 - Present: Assistant Professor, Department of Chemical Engineering, Hongik University<br>09/2024 - 02/2026: Postdoctoral Researcher, University of California, Los Angeles (Advisor: Prof. Alissa Park)<br>03/2024 - 08/2024: Postdoctoral Researcher, KAIST (Advisor: Prof. Jae W. Lee)<br><br>Ph.D., Chemical and Biomolecular Engineering, KAIST (2024) (Advisor: Prof. Jae W. Lee)<br>M.S., Chemical and Biomolecular Engineering, KAIST (2019) (Advisor: Prof. Jae W. Lee)<br>B.S., Chemical and Biomolecular Engineering, KAIST (2018)</p>
+                        <p id="pi-info"><strong>이원형 (Wonhyeong Lee)</strong><br>Assistant Professor, Department of Chemical Engineering, Hongik University<br><br>03/2026 - Present: Assistant Professor, Department of Chemical Engineering, Hongik University<br>09/2024 - 02/2026: Postdoctoral Researcher, University of California, Los Angeles (Advisor: Prof. Alissa Park)<br>03/2024 - 08/2024: Postdoctoral Researcher, KAIST (Advisor: Prof. Jae W. Lee)<br><br>Ph.D., Chemical and Biomolecular Engineering, KAIST (2024) (Advisor: Prof. Jae W. Lee)<br>M.S., Chemical and Biomolecular Engineering, KAIST (2019) (Advisor: Prof. Jae W. Lee)<br>B.S., Chemical and Biomolecular Engineering, KAIST (2018)</p>
                     </div>
                 </div>
 
@@ -959,7 +1050,7 @@
                             <div class="student-name">권유정 (Yujung Kwon)</div>
                             <div class="student-detail">학부 연구생 (Undergraduate)</div>
                             <div class="student-detail">연구분야: Biomass upcycling</div>
-                        </div>
+                        <div class="student-detail-full">학부 연구생 (Undergraduate) (2026.03 - Present)<br>연구분야: Biomass upcycling</div></div>
                         
                         <div class="student-item">
                             
@@ -968,7 +1059,7 @@
                             <div class="student-name">김채원 (Chaewon Kim)</div>
                             <div class="student-detail">학부 연구생 (Undergraduate)</div>
                             <div class="student-detail">연구분야: Clathrate hydrate</div>
-                        </div>
+                        <div class="student-detail-full">학부 연구생 (Undergraduate) (2026.03 - Present)<br>연구분야: Clathrate hydrate</div></div>
                     <div class="student-item">
                 
                 <img class="student-photo" src="images/Members/profile_haemin_kim.jpg" alt="Student Photo">
@@ -976,21 +1067,21 @@
                 <div class="student-name">김해민 (Haemin Kim)</div>
                 <div class="student-detail">학부 연구생 (Undergraduate)</div>
                 <div class="student-detail">연구분야: Clathrate hydrate</div>
-            </div><div class="student-item">
+            <div class="student-detail-full">학부 연구생 (Undergraduate) (2026.03 - Present)<br>연구분야: Clathrate hydrate</div></div><div class="student-item">
                 
                 <img class="student-photo" src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?q=80&amp;w=774&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Student Photo">
                 
                 <div class="student-name">이시은</div>
                 <div class="student-detail">학부 연구생 (Undergraduate)</div>
                 <div class="student-detail">연구분야: Biomass upcycling</div>
-            </div><div class="student-item">
+            <div class="student-detail-full">학부 연구생 (Undergraduate) (2026.03 - Present)<br>연구분야: Biomass upcycling</div></div><div class="student-item">
                 
                 <img class="student-photo" src="images/Members/profile_wonbin_han.jpg" alt="Student Photo">
                 
                 <div class="student-name">한원빈 (Wonbin Han)</div>
                 <div class="student-detail">학부 연구생 (Undergraduate)</div>
                 <div class="student-detail">연구분야: Clathrate hydrate</div>
-            </div></div>
+            <div class="student-detail-full">학부 연구생 (Undergraduate) (2026.03 - Present)<br>연구분야: Clathrate hydrate</div></div></div>
                 </div>
             </div>
 
@@ -1092,6 +1183,17 @@
         <div id="lightbox-caption"><strong>Hongik University</strong><br>홍익대학교</div>
     </div>
 
+    
+    <div id="student-profile-modal" class="profile-modal" onclick="closeStudentProfile(event)">
+        <div class="profile-box" onclick="event.stopPropagation()">
+            <span class="profile-close" onclick="closeStudentProfile()">×</span>
+            <img class="profile-photo" id="profile-photo" src="images/Members/profile_chaewon_kim.jpg" alt="Member Photo">
+            <div class="profile-name" id="profile-name">김채원 (Chaewon Kim)</div>
+            <div class="profile-detail" id="profile-detail">학부 연구생 (Undergraduate) (2026.03 - Present)<br>연구분야: Clathrate hydrate</div>
+            
+        </div>
+    </div>
+
     <footer>
         <p>© 2026 Energy &amp; Environmental Engineering Lab. All Rights Reserved.</p>
         <p>Hongik University, Department of Chemical Engineering</p>
@@ -1167,9 +1269,61 @@
         function closeLightbox() {
             document.getElementById('lightbox-modal').style.display = "none";
         }
+
+        // ----- 학생/졸업생 상세 프로필 팝업 (공개용 · 배포 index.html 에서도 동작) -----
+        let currentProfileItem = null;
+
+        // 학생 카드를 클릭하면 상세 프로필 팝업을 연다.
+        // 단, 편집용 요소/버튼/링크를 클릭한 경우(관리자 모드의 인라인 편집 등)는 제외.
+        document.addEventListener('click', function (e) {
+            const item = e.target.closest('.student-item');
+            if (!item) return;
+            if (e.target.closest('button, input, label, a, .reorder-ui, [contenteditable="true"]')) return;
+            openStudentProfile(item);
+        });
+
+        function openStudentProfile(item) {
+            currentProfileItem = item;
+            const modal = document.getElementById('student-profile-modal');
+            if (!modal) return;
+
+            const photo = item.querySelector('.student-photo');
+            const nameEl = item.querySelector('.student-name');
+            document.getElementById('profile-photo').src = photo ? photo.getAttribute('src') : '';
+            document.getElementById('profile-name').innerText = nameEl ? nameEl.innerText.trim() : '';
+
+            const detailEl = document.getElementById('profile-detail');
+            const full = item.querySelector('.student-detail-full');
+            let html = full ? full.innerHTML.trim() : '';
+            // 아직 상세 정보를 입력하지 않았다면 카드의 요약 줄들을 기본값으로 보여줌
+            if (!html) {
+                const shorts = Array.from(item.querySelectorAll('.student-detail'))
+                    .map(d => d.innerHTML.trim()).filter(Boolean);
+                html = shorts.join('<br>');
+            }
+            detailEl.innerHTML = html;
+
+            // 관리자 모드에서는 팝업에서 바로 상세 정보를 입력/수정할 수 있음
+            if (document.body.classList.contains('admin-active')) {
+                detailEl.setAttribute('contenteditable', 'true');
+                setTimeout(() => detailEl.focus(), 0);
+            } else {
+                detailEl.removeAttribute('contenteditable');
+            }
+            modal.classList.add('open');
+        }
+
+        function closeStudentProfile(e) {
+            const modal = document.getElementById('student-profile-modal');
+            if (modal) modal.classList.remove('open');
+            const detailEl = document.getElementById('profile-detail');
+            if (detailEl) detailEl.removeAttribute('contenteditable');
+            currentProfileItem = null;
+        }
     </script>
 
     
     
+
 
 </body></html>
